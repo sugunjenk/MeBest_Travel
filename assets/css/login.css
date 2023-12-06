@@ -1,0 +1,59 @@
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+    overflow-y: hidden;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container-fluid {
+    background-image: url("./../img/edwin-petrus-H5dEsvEuijg-unsplash.jpg");
+}
+
+.container {
+    max-width: 380px;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.invalid-feedback {
+    color: rgb(250, 124, 170);
+}
+
+.valid-feedback {
+    color: rgb(32, 255, 73);
+}
+
+.form-control {
+    border: 1px solid black;
+}
+
+.form-control.is-valid:focus,
+.was-validated .form-control:valid:focus,
+.form-control.is-invalid:focus,
+.was-invalidated .form-control:invalid:focus {
+    border: 2px solid black;
+    box-shadow: none
+}
+
+.form-control.is-valid,
+.was-validated .form-control:valid {
+    border-color: rgb(32, 255, 73);
+}
+
+.form-control.is-invalid,
+.was-invalidated .form-control:invalid {
+    border-color: rgb(250, 124, 170);
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+}
