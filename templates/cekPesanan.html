@@ -16,25 +16,68 @@
     <header>
 
     </header>
-    <main class="container-fluid p-3">
-        <div class="d-flex gap-4 justify-content-stretch">
-            <div class="gambar d-block p-1">
-                <img src="./../assets/img/profile-2023-10-15-18-06-10.jpg" alt="Tanjung Pinang">
-            </div>
-            <div class="text d-flex gap-2 flex-column align-items-stretch justify-content-stretch w-100">
-                <h1 class="fs-3">Tanjung Pinang</h1>
-                <p>2 Ticket</p>
-                <p>Paket A</p>
-                <p>Rp 250,000</p>
-                <div class="statusWaktu d-flex justify-content-between align-items-center w-100">
-                    <p class="text-success p-2 border border-success border-2 my-0">Success</p>
-                    <p class="d-none text-warning p-2 border border-warning border-2 my-0">Pending</p>
-                    <p class="d-none text-danger p-2 border border-danger border-2 my-0">Dibatalkan</p>
-                    <p class="text-dark my-0">22/12/2002 11:59</p>
+    <main class="container-fluid p-0">
+        <!-- content 1 -->
+        <div class="container-fluid d-flex align-items-center p-3">
+            <div id="cek" class="d-flex gap-4 justify-content-stretch w-100">
+                <div class="gambar d-block p-1">
+                    <img src="./../assets/img/profile-2023-10-15-18-06-10.jpg" alt="Tanjung Pinang">
+                </div>
+                <div class="text d-flex gap-2 flex-column align-items-stretch justify-content-stretch w-100">
+                    <h1 class="text-start" style="color: #1CE8D4;">Tanjung Pinang + Resort</h1>
+
+                    <table class="w-100">
+                        <tr id="namaPemesan">
+                            <td class="text-start">Nama Pemesanan</td>
+                            <td class="text-start">
+                                <div>Salahudin Kholik Prasetyono</div>
+                            </td>
+                        </tr>
+                        <tr id="noPemesan">
+                            <td class="text-start">No Pemesan</td>
+                            <td class="text-start">+62895359530117</td>
+                        </tr>
+                        <tr id="tglPemesan">
+                            <td class="text-start">Tanggal Tour</td>
+                            <td class="text-start">11/02/2003 11:05</td>
+                        </tr>
+                        <tr id="jmlTicket">
+                            <td class="text-start">Jumlah Ticket</td>
+                            <td class="text-start">2 Ticket</td>
+                        </tr>
+                        <tr id="jenisPaket">
+                            <td class="text-start">Jenis Paket</td>
+                            <td class="text-start">Paket B</td>
+                        </tr>
+                        <tr id="jmlHarga">
+                            <td class="text-start">Jumlah Harga</td>
+                            <td class="text-start">Rp 250,000</td>
+                        </tr>
+                    </table>
+                    <div class="statusWaktu d-flex justify-content-between align-items-center w-100">
+                        <div class="statusPerubahan d-flex justify-content-start align-items-center">
+                            <p id="hasilStatus"
+                                class="text-center text-success p-2 border border-success border-2 my-0 ">Success
+                            </p>
+                            <p id="hasilStatus"
+                                class="text-center d-none text-warning p-2 border border-warning border-2 my-0 ">
+                                Pending</p>
+                            <p id="hasilStatus"
+                                class=" text-center d-none text-danger p-2 border border-danger border-2 my-0 ">
+                                Dibatalkan</p>
+                            <select class="status form-select border border-dark w-50"
+                                aria-label="Default select example">
+                                <option selected disabled>-- pilih Status --</option>
+                                <option value="success">Success</option>
+                                <option value="pending">pending</option>
+                                <option value="dibatalkan">dibatalkan</option>
+                            </select>
+                        </div>
+                        <p class="tanggalKadaluarsa text-end text-danger fw-bold my-0">22/12/2002 11:59</p>
+                    </div>
                 </div>
             </div>
         </div>
-
         <hr>
 
     </main>
