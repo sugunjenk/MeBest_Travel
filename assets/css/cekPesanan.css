@@ -5,18 +5,37 @@
     padding: 0;
 }
 
+body {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    gap: 2rem;
+}
+
+.navbar {
+    background-color: rgb(255, 166, 0);
+}
+
+.navbar-nav li {
+    font-weight: auto;
+    border-bottom: 2px solid rgba(255, 255, 255, 0);
+    transition: .4s ease-in-out;
+}
+
+.navbar-nav li:hover {
+    border-bottom-color: rgba(255, 255, 255, 1);
+}
+
+#active {
+    color: orange;
+}
+
 #cek {
     height: 100%;
 }
 
 .text h1 {
     font-size: 2.5rem;
-}
-
-body {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
 }
 
 .gambar {
@@ -36,6 +55,30 @@ body {
 .row>* {
     padding-right: 0;
     padding-left: 0;
+}
+
+.navbar-nav {
+    gap: 20px;
+}
+
+a {
+    color: white !important;
+}
+
+
+#Hero {
+    width: 100%;
+    background-image: url('./bgHero.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 700px;
+}
+
+.fcontainer {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.315);
 }
 
 hr {
@@ -103,6 +146,11 @@ tr td:last-child {
     border: none;
 }
 
+.navbar-brand img {
+    width: 100%;
+    height: 70px;
+}
+
 @media screen and (max-width: 1200px) {
     .gambar {
         max-width: 20%;
@@ -119,7 +167,22 @@ tr td:last-child {
 
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 992px) {
+    .navbar-nav {
+        text-align: center;
+        gap: unset;
+    }
+
+    .navbar-nav li:hover {
+        font-weight: 700;
+        transition: font-weight .4s ease-in-out;
+        border: none;
+    }
+
+    .active {
+        border: none;
+    }
+
     .gambar {
         max-width: 25%;
         max-height: 100%;
@@ -212,7 +275,7 @@ tr td:last-child {
 @media screen and (max-width: 500px) {
     .gambar {
         max-width: 30%;
-        height: 100%
+        height: 150px;
     }
 
     td,
@@ -263,6 +326,11 @@ tr td:last-child {
 }
 
 @media screen and (max-width: 375px) {
+    .navbar-brand img {
+        width: 85%;
+        height: 40px
+    }
+
     .gambar {
         max-width: 30%;
         height: 100px;
