@@ -1,0 +1,43 @@
+#active{
+    color: orange;
+}
+body{
+    height: 300vh;
+}
+
+.navbar-nav{
+    gap: 20px;
+}
+
+a{
+    color: white !important;
+}
+
+
+#Hero{
+    width: 100%;
+    background-image: url('./bgHero.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 700px;
+}
+
+.fcontainer{
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.315);
+}
+
+@media screen and (max-width:992px) {
+    .navbar-nav{
+        text-align: center;
+        gap: unset;
+    }
+    .navbar{
+        background-color: rgb(255, 166, 0);
+    }
+    .active{
+        border: none;
+    }
+}
