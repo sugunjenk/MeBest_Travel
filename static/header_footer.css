@@ -1,9 +1,7 @@
 #active{
     color: orange;
 }
-body{
-    height: 300vh;
-}
+
 
 .navbar-nav{
     gap: 20px;

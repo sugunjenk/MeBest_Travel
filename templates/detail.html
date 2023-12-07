@@ -14,8 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitter&family=Noto+Serif+Display:wght@500;700&family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/header_footer.css" />
+    <link rel="stylesheet" href="/static/detail.css" />
   </head>
-  <body>
+  
     <!-- navbar -->
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
@@ -39,7 +40,7 @@
           <!-- nav mid -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a id="active" class="nav-link" aria-current="page" href="#">Home</a>
+              <a  class="nav-link" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
@@ -48,7 +49,7 @@
               <a class="nav-link" href="#">Documentation</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Tours</a>
+              <a id="active" class="nav-link" href="#">Tours</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Cek Pesanan</a>
@@ -76,27 +77,121 @@
     <!-- navbar -->
 
     <!-- Hero -->
-    <div id="Hero">
+    <div id="Hero" style="height: 500px; background-position: top;">
       <div class="fcontainer">
         <div class="container">
           <div class="row">
             <div class="col-12 text-center">
               <h1 style="color: white; font-weight: 800">
-                "Explore. Dream. Discover. Your Gateway to Limitless Adventures
-                with <span style="color: orange">MeBest Travel</span>."
+                DETAILS TOURS <span style="color: orange">MeBest Travel</span>
               </h1>
-              <button
-                class="btn btn-warning mt-3"
-                style="color: white; font-weight: 500"
-              >
-                Explore Now
-              </button>
+              
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Hero -->
+
+    <!-- Content -->
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="TitleContent">
+                        <h1>DETAIL TOURS</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container-fluid" style="margin-top: 50px; margin-bottom: 50px;">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="imgdetail">
+                        <img src="/static/kintamani.jpg" alt="" width="100%">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="TempatWisata">
+                        <p>Kintamani</p>
+                    </div>
+                    <div class="IsiWisata">
+                        <p> Harga Tiket : Rp. 1.000.000</p>
+                        <div class="form">
+                            <form>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="nama" placeholder="Nama">
+                                    <label for="nama">Nama</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="kontak" placeholder="Kontak">
+                                    <label for="kontak">Kontak</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <select class="form-select" id="tiket" aria-label="Floating label select example">
+                                      <option selected>Jumlah Ticket</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                      <option value="6">6</option>
+                                      <option value="7">7</option>
+                                      <option value="8">8</option>
+                                      <option value="9">9</option>
+                                      <option value="10">10</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <select class="form-select" id="paket" aria-label="Floating label select example">
+                                      <option selected>Pilih Paket Tour</option>
+                                      <option value="1">Tour</option>
+                                      <option value="2">Tour & Documentation</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="date" id="tanggal" name="tanggal" required>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="nama" placeholder="Nama">
+                                    <label for="totalharga"> Total Harga : 1.000.000</label>
+                                  </div>
+                                <button type="submit" class="btn btn-primary">Booking</button>
+                              </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+
+    <section>
+        <div class="container-fluid" style="margin-top: 80px; margin-bottom: 50px;">
+            <div class="row">
+                <div class="col-lg-1">
+
+                </div>
+                <div class="col-lg-10">
+                    <div class="TempatWisata">
+                        <div class="text-center">
+                            <p>Kintamani</p>
+                        </div>
+                    </div>
+                    <div class="deskripsi">
+                        <p>Kintamani merupakan salah satu tempat wisata terbaik di bali, yang menyediakan pemandangan alam yang menakjubkan seperti danau dan gunung batur, selain itu kintamani juga bisa memberikan pengunjung dengan sejuknya udara disana serta, serta memberikan sunsrise yang memukau saat pagi dengan lautan awan di sekeliling gunung batur.</p>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- EndContent -->
 
     <!-- footer -->
     <footer>
