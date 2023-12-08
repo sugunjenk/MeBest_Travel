@@ -13,7 +13,7 @@ body {
 }
 
 .container-fluid {
-    background-image: url("./../img/edwin-petrus-H5dEsvEuijg-unsplash.jpg");
+    background-image: url("/static/img/edwin-petrus-H5dEsvEuijg-unsplash.jpg");
 }
 
 .container {

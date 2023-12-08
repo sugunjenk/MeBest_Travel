@@ -26,6 +26,10 @@ body {
     border-bottom-color: rgba(255, 255, 255, 1);
 }
 
+.navbar-nav li:last-child:hover {
+    border-bottom: none
+}
+
 #active {
     color: orange;
 }
