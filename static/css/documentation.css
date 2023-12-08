@@ -79,6 +79,12 @@ main {
         background-color: rgb(255, 166, 0);
     }
 
+    #active {
+        font-weight: 700;
+        transition: font-weight .4s ease-in-out;
+        border: none;
+    }
+
     .active {
         border: none;
     }

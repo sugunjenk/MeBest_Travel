@@ -16,13 +16,13 @@ body {
     background-color: rgb(255, 166, 0);
 }
 
-.navbar-nav li {
+#linker li {
     font-weight: auto;
     border-bottom: 2px solid rgba(255, 255, 255, 0);
     transition: .4s ease-in-out;
 }
 
-.navbar-nav li:hover {
+#linker li:hover {
     border-bottom-color: rgba(255, 255, 255, 1);
 }
 
@@ -31,7 +31,7 @@ body {
 }
 
 #active {
-    color: orange;
+    border-bottom: 2px solid white;
 }
 
 #cek {
@@ -177,7 +177,13 @@ tr td:last-child {
         gap: unset;
     }
 
-    .navbar-nav li:hover {
+    #linker li:hover {
+        font-weight: 700;
+        transition: font-weight .4s ease-in-out;
+        border: none;
+    }
+
+    .navbar-nav #active {
         font-weight: 700;
         transition: font-weight .4s ease-in-out;
         border: none;
