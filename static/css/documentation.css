@@ -14,6 +14,7 @@ body {
     color: orange;
 }
 
+/* copy ini */
 #linker li {
     font-weight: auto;
     border-bottom: 2px solid rgba(255, 166, 0, 0);
@@ -27,6 +28,8 @@ body {
 #linker li.scroll:hover {
     border-bottom-color: rgba(255, 255, 255, 1);
 }
+
+/* dan sini */
 
 .navbar-nav {
     gap: 20px;
@@ -79,6 +82,7 @@ main {
         background-color: rgb(255, 166, 0);
     }
 
+    /* copy sini */
     #active {
         font-weight: 700;
         transition: font-weight .4s ease-in-out;
@@ -94,6 +98,8 @@ main {
         transition: font-weight .4s ease-in-out;
         border: none;
     }
+
+    /* dan sini */
 }
 
 @media screen and (max-width: 768px) {
