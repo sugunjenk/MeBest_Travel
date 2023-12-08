@@ -38,4 +38,19 @@ a{
     .active{
         border: none;
     }
+
+       /* copy sini */
+    #active {
+        font-weight: 700;
+        transition: font-weight .4s ease-in-out;
+        border: none;
+    }
+
+    
+
+    #linker li:hover {
+        font-weight: 700;
+        transition: font-weight .4s ease-in-out;
+        border: none;
+    }
 }
