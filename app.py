@@ -22,6 +22,34 @@ def index():
 def tours():
     return render_template('tours.html')
 
+# authentikasi
+
+
+@app.route("/to_register", methods=['GET'])
+def to_register():
+    return render_template('register.html')
+
+
+@app.route("/to_login", methods=['GET'])
+def to_login():
+    return render_template('login.html')
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    username_receive = request.form['username']
+    password_receive = request.form['password']
+    print(username_receive, password_receive)
+    return jsonify(
+        {
+            'result': 'success',
+            'username': username_receive,
+            'Passsword': password_receive
+        }
+    )
+
+# end autentikasi
+
 
 @app.route('/detail_tours')
 def detail_tours():
