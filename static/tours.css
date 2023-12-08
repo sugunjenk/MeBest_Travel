@@ -1,0 +1,37 @@
+* {
+    font-family: 'Bitter', serif;
+    font-family: 'Noto Serif Display', serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+   */
+
+.card-title {
+    color: orange;
+    font-weight: bold;
+}
+
+.TambahTour button {
+    font-weight: bold;
+}
+
+.btncrud {
+    gap: 20px;
+    justify-content: center;
+}
+
+@media (max-width: 375px) and (max-height: 667px) {
+  
+  
+    .card {
+      margin-bottom: 40px !important; /* Memberikan margin bawah agar card terlihat rapi */
+    }
+  
+    /* Tambahkan kodingan CSS tambahan sesuai kebutuhan pada ukuran layar yang ditargetkan */
+  }
+
