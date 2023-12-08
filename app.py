@@ -22,6 +22,10 @@ def index():
 def tours():
     return render_template('tours.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 # authentikasi
 
 
