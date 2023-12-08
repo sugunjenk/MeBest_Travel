@@ -11,10 +11,16 @@
 }
    */
 
+.card {
+    box-shadow: 0 0.5rem 1rem rgb(0, 0, 0, 0.7);
+}
+
 .card-title {
     color: orange;
     font-weight: bold;
 }
+  
+
 
 .TambahTour button {
     font-weight: bold;
