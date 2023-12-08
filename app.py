@@ -22,6 +22,14 @@ def index():
 def tours():
     return render_template('tours.html')
 
+@app.route('/documentation')
+def documentation():
+    return render_template('documentation.html')
+
+@app.route('/cek_pesanan')
+def cek_pesanan():
+    return render_template('cekPesanan.html')
+
 @app.route('/about')
 def about():
     return render_template('about.html')
