@@ -17,52 +17,67 @@
 
 <body class="d-flex flex-column justify-content-center align-items-center">
     <header>
-        <!-- navbar -->
-        <nav id="navbar" class="navbar navbar-expand-lg relative-top vw-100">
-            <div class="container-fluid">
-                <div class="wrap-brand">
-                    <a class="navbar-brand" href="#"><img src="/static/logo.png" alt="Brand.jpg" /></a>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <!-- nav mid -->
-                    <ul class="navbar-nav ms-auto" id="linker">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/documentation">Documentation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/tours">Tours</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/cek_pesanan">Cek Pesanan</a>
-                        </li>
-                    </ul>
-                    <!-- nav mid -->
+         <!-- navbar -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+          <div class="wrap-brand">
+            <a class="navbar-brand" href="#"
+              ><img src="/static/logo.png" width="100%" height="70px" alt=""
+            /></a>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <!-- nav mid -->
+            <ul class="navbar-nav ms-auto" id="linker">
+              <li class="nav-item">
+                <a  class="nav-link" aria-current="page" href="/"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/documentation">Documentation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tours">Tours</a>
+              </li>
+              <li class="nav-item">
+                <a id="active" class="nav-link" href="/cek_pesanan">Cek Pesanan</a>
+              </li>
+            </ul>
+            <!-- nav mid -->
+  
+            <!-- nav login -->
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#"
+                  ><button
+                    style="color: white; font-weight: 500"
+                    class="Login btn btn-warning px-4 py-2"
+                  >
+                    Login
+                  </button></a
+                >
+              </li>
+            </ul>
+            <!-- nav login -->
+          </div>
+        </div>
+      </nav>
+      <!-- navbar -->
 
-                    <!-- nav login -->
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#"><button
-                                    style="color: white; font-weight: 500" class="Login btn btn-warning px-4 py-2">
-                                    Login
-                                </button></a>
-                        </li>
-                    </ul>
-                    <!-- nav login -->
-                </div>
-            </div>
-        </nav>
-        <!-- navbar -->
     </header>
     <main class="container-fluid p-0">
         <!-- content 1 -->

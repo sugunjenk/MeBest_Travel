@@ -4,3 +4,15 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.cardImage {
+  overflow: hidden;
+}
+
+.card img {
+  transition: 0.5s;
+}
+
+.card:hover img {
+  scale: 1.5;
+}

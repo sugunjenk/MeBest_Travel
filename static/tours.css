@@ -1,15 +1,6 @@
-* {
-    font-family: 'Bitter', serif;
-    font-family: 'Noto Serif Display', serif;
-    font-family: 'Poppins', sans-serif;
-}
 
-/* .card-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-   */
+
+
 
 .card-title {
     color: orange;
@@ -114,3 +105,12 @@
     display: none;
   }
   
+  .cardImage{
+    overflow: hidden;
+  }
+  .card img{
+    transition: 0.5s;
+  }
+  .card:hover img{
+    scale: 1.5;
+  }
