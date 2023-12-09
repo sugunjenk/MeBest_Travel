@@ -11,7 +11,7 @@ body {
 }
 
 #active {
-    color: orange;
+    border-bottom-color: rgba(255, 166, 0, 1);
 }
 
 /* copy ini */
@@ -26,6 +26,10 @@ body {
 }
 
 #linker li.scroll:hover {
+    border-bottom-color: rgba(255, 255, 255, 1);
+}
+
+#linker li.scroll:active {
     border-bottom-color: rgba(255, 255, 255, 1);
 }
 
@@ -79,7 +83,7 @@ main {
     }
 
     .navbar {
-        background-color: rgb(255, 166, 0);
+        background-color: #ffa600;
     }
 
     /* copy sini */
@@ -94,6 +98,12 @@ main {
     }
 
     #linker li:hover {
+        font-weight: 700;
+        transition: font-weight .4s ease-in-out;
+        border: none;
+    }
+
+    #linker li.scroll:active {
         font-weight: 700;
         transition: font-weight .4s ease-in-out;
         border: none;
