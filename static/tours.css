@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-=======
-* {
-  font-family: 'Bitter', serif;
-  font-family: 'Noto Serif Display', serif;
-  font-family: 'Poppins', sans-serif;
-}
->>>>>>> 9c7a12f205c663cf31843e115d23ef12945eba6f
-
-
-
 
 .card-title {
   color: orange;
@@ -51,7 +40,7 @@
     /* Memberikan margin bawah agar card terlihat rapi */
   }
 
-<<<<<<< HEAD
+
   .search-box{
     position: relative;
     height: 60px;
@@ -140,8 +129,7 @@
   .card:hover img{
     scale: 1.5;
   }
-=======
-  /* Tambahkan kodingan CSS tambahan sesuai kebutuhan pada ukuran layar yang ditargetkan */
+
 }
 
 .search-box {
@@ -234,4 +222,4 @@
 .search-box .search-data.active {
   display: none;
 }
->>>>>>> 9c7a12f205c663cf31843e115d23ef12945eba6f
+
