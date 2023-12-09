@@ -22,13 +22,16 @@ def index():
 def tours():
     return render_template('tours.html')
 
+
 @app.route('/documentation')
 def documentation():
     return render_template('documentation.html')
 
+
 @app.route('/cek_pesanan')
 def cek_pesanan():
     return render_template('cekPesanan.html')
+
 
 @app.route('/about')
 def about():
@@ -49,16 +52,7 @@ def to_login():
 
 @app.route('/login', methods=['POST'])
 def login():
-    username_receive = request.form['username']
-    password_receive = request.form['password']
-    print(username_receive, password_receive)
-    return jsonify(
-        {
-            'result': 'success',
-            'username': username_receive,
-            'Passsword': password_receive
-        }
-    )
+    pass
 
 # end autentikasi
 
