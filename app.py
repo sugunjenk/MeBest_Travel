@@ -9,6 +9,10 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
+client = MongoClient(
+    "mongodb+srv://admin:admin123@mebesttravel.75vrujy.mongodb.net/?retryWrites=true&w=majority")
+
+db = client.mebest
 
 app = Flask(__name__)
 
@@ -53,6 +57,31 @@ def to_login():
 @app.route('/login', methods=['POST'])
 def login():
     pass
+
+# Todo: belum selesai
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    nickname_receive = request.form['nickname_give']
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+
+    password_hash = hashlib.sha256(
+        (password_receive).encode('utf-8')).hexdigest()
+    print(password_hash)
+
+    doc = {
+        'nickname': nickname_receive,
+        'username': username_receive,
+        'password': password_receive,
+        'role': 2
+    }
+
+    db.users.insert_one(doc)
+
+    return jsonify({'result': 'success'})
+
 
 # end autentikasi
 

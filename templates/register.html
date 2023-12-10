@@ -36,33 +36,32 @@
         <div class="col-12">
           <!-- kalo invalid ubah is-valid dan valid-feedback menjadi invalid dan sebaliknya -->
           <label for="nickname" class="form-label">Nickname</label>
-          <input type="text" class="form-control is-invalid" id="nickname" aria-describedby="nicknameFeedback"
-            name="nickname" placeholder="Masukkan nickname" />
+          <input type="text" class="form-control" id="nickname" aria-describedby="nicknameFeedback" name="nickname"
+            placeholder="Masukkan nickname" />
           <div id="nicknameFeedback"></div>
         </div>
         <div class="col-12">
           <!-- kalo invalid ubah is-valid dan valid-feedback menjadi invalid dan sebaliknya -->
           <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control is-valid" id="username" aria-describedby="usernameFeedback" required />
-          <div id="usernameFeedback" class="valid-feedback">
-            Username is valid
+          <input type="text" class="form-control" id="username" aria-describedby="usernameFeedback"
+            placeholder="Masukkan username anda" />
+          <div id="usernameFeedback" class="text-warning">
+            Silahkan masukkan username anda 2-10 aphabet, nomor dan special character -_.
           </div>
         </div>
         <div class="col-12">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control is-invalid" id="password" aria-describedby="passwordFeedback"
-            required />
-          <div id="passwordFeedback" class="invalid-feedback">
-            Your password must be 8-20 characters long, contain letters and
-            numbers, and must not contain spaces, special characters, or
-            emoji.
+          <input type="password" class="form-control" id="password" aria-describedby="passwordFeedback"
+            placeholder="Masukkan password anda" />
+          <div id="passwordFeedback" class="text-warning">
+            Silahkan masukkan password anda 8-20 aphabet, nomor dan special character !@#$%^&*
           </div>
         </div>
         <div class="col-12">
           <label for="password2" class="form-label">Confirm Password</label>
-          <input type="password" class="form-control is-invalid" id="password2" aria-describedby="password2Feedback"
-            required />
-          <div id="password2Feedback" class="invalid-feedback"></div>
+          <input type="password" class="form-control" id="password2" aria-describedby="password2Feedback"
+            placeholder="Masukkan ulang Password anda" />
+          <div id="password2Feedback" class=""></div>
         </div>
         <div class="col-12 d-flex justify-content-center">
           <button type="submit" class="btn btn-danger btn-lg w-100" id="submit" onclick="register()">
