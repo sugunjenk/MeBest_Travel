@@ -56,7 +56,16 @@ def to_login():
 
 @app.route('/login', methods=['POST'])
 def login():
-    pass
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+    password_hash = hashlib.sha256(
+        (password_receive).encode('utf-8')).hexdigest()
+    print(username_receive, password_hash)
+    result = db.users.find_one({
+        'username': username_receive,
+        'password': password_hash
+    })
+    print(result)
 
 
 @app.route('/register', methods=['POST'])
@@ -90,7 +99,6 @@ def register():
         'result': 'success',
         'msg': 'Successfully registered!'
     })
-
 
 # end autentikasi
 
