@@ -58,29 +58,38 @@ def to_login():
 def login():
     pass
 
-# Todo: belum selesai
-
 
 @app.route('/register', methods=['POST'])
 def register():
     nickname_receive = request.form['nickname_give']
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
+    print(nickname_receive)
 
     password_hash = hashlib.sha256(
         (password_receive).encode('utf-8')).hexdigest()
-    print(password_hash)
+    cek_data_nama = db.users.find_one({'nickname': nickname_receive})
+    cek_nama = bool(cek_data_nama)
+    print(cek_nama)
+    if (cek_nama == True):
+        return jsonify({
+            'result': 'failed_name',
+            'msg': 'Nickname already exists!, please try input again'
+        })
 
     doc = {
         'nickname': nickname_receive,
         'username': username_receive,
-        'password': password_receive,
+        'password': password_hash,
         'role': 2
     }
 
     db.users.insert_one(doc)
 
-    return jsonify({'result': 'success'})
+    return jsonify({
+        'result': 'success',
+        'msg': 'Successfully registered!'
+    })
 
 
 # end autentikasi

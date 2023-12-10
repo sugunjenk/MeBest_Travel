@@ -112,15 +112,30 @@ function register () {
       username_give: username_receive,
       password_give: password_receive
     },
-    success: function (response) {}
+    success: function (response) {
+      // success
+      if (response.result === 'success') {
+        alert(response.msg)
+        window.location.replace('/to_login')
+        // gagal
+      } else if (response.result === 'failed_name') {
+        $('#nicknameFeedback')
+          .removeClass('valid-feedback')
+          .addClass('invalid-feedback')
+          .text(response.msg)
+        $('#nickname').removeClass('is-valid').addClass('is-invalid').focus()
+      }
+    }
   })
 }
 
+// cek username regex
 function is_username (asValue) {
   var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/
   return regExp.test(asValue)
 }
 
+// cek password regex
 function is_password (asValue) {
   var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/
   return regExp.test(asValue)
