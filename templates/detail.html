@@ -1,251 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MeBest Travel | Detail Tours</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/header_footer.css" />
+    <link rel="stylesheet" href="/static/detail.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid">
+        <div class="wrap-brand">
+          <a class="navbar-brand" href="#"
+            ><img src="/static/logo.png" width="100%" height="70px" alt=""
+          /></a>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <!-- nav mid -->
+          <ul class="navbar-nav ms-auto" id="linker">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/documentation">Documentation</a>
+            </li>
+            <li class="nav-item">
+              <a id="active" class="nav-link" href="/tours">Tours</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/cek_pesanan">Cek Pesanan</a>
+            </li>
+          </ul>
+          <!-- nav mid -->
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Detail Tours</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bitter&family=Noto+Serif+Display:wght@500;700&family=Poppins:wght@300&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="/static/header_footer.css" />
-  <link rel="stylesheet" href="/static/detail.css" />
-</head>
-
-<!-- navbar -->
-<nav id="navbar" class="navbar navbar-expand-lg fixed-top">
-  <div class="container-fluid">
-    <div class="wrap-brand">
-      <a class="navbar-brand" href="#"><img src="/static/logo.png" width="100%" height="70px" alt="" /></a>
-    </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <!-- nav mid -->
-      <ul class="navbar-nav ms-auto" id="linker">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/documentation">Documentation</a>
-        </li>
-        <li class="nav-item">
-          <a id="active" class="nav-link" href="/tours">Tours</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/cek_pesanan">Cek Pesanan</a>
-        </li>
-      </ul>
-      <!-- nav mid -->
-
-      <!-- nav login -->
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#"><button style="color: white; font-weight: 500"
-              class="Login btn btn-warning px-4 py-2">
-              Login
-            </button></a>
-        </li>
-      </ul>
-      <!-- nav login -->
-    </div>
-  </div>
-</nav>
-<!-- navbar -->
-
-<!-- Hero -->
-<div id="Hero" style="height: 500px; background-position: top;">
-  <div class="fcontainer">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h1 style="color: white; font-weight: 800">
-            DETAILS TOURS <span style="color: orange">MeBest Travel</span>
-          </h1>
-
+          <!-- nav login -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#"
+                ><button
+                  style="color: white; font-weight: 500"
+                  class="Login btn btn-warning px-4 py-2"
+                >
+                  Login
+                </button></a
+              >
+            </li>
+          </ul>
+          <!-- nav login -->
         </div>
       </div>
-    </div>
-  </div>
-</div>
-<!-- Hero -->
+    </nav>
 
-<!-- Content -->
-<section>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="TitleContent">
-          <h1>DETAIL TOURS</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container-fluid" style="margin-top: 50px; margin-bottom: 50px;">
-    <div class="row">
-      <div class="col-md-7">
-        <div class="imgdetail">
-          <img src="/static/kintamani.jpg" alt="" width="100%">
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="TempatWisata">
-          <p>Kintamani</p>
-        </div>
-        <div class="IsiWisata">
-          <p> Harga Tiket : Rp. 1.000.000</p>
-          <div class="form">
-            <form>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="nama" placeholder="Nama">
-                <label for="nama">Nama</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="kontak" placeholder="Kontak">
-                <label for="kontak">Kontak</label>
-              </div>
-              <div class="form-floating mb-3">
-                <select class="form-select" id="tiket" aria-label="Floating label select example">
-                  <option selected>Jumlah Ticket</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-              </div>
-              <div class="form-floating mb-3">
-                <select class="form-select" id="paket" aria-label="Floating label select example">
-                  <option selected>Pilih Paket Tour</option>
-                  <option value="1">Tour</option>
-                  <option value="2">Tour & Documentation</option>
-                </select>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="date" id="tanggal" name="tanggal" required>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="nama" placeholder="Nama">
-                <label for="totalharga"> Total Harga : 1.000.000</label>
-              </div>
-              <button type="submit" class="btn btn-primary">Booking</button>
-            </form>
+    <!-- Hero -->
+    <div id="Hero" style="height: 500px; background-position: top">
+      <div class="fcontainer">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center">
+              <h1 style="color: white; font-weight: 800">
+                DETAIL TOURS <span style="color: orange">MeBest Travel</span>
+              </h1>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<hr>
+    <!-- Hero -->
 
-<section>
-  <div class="container-fluid" style="margin-top: 80px; margin-bottom: 50px;">
-    <div class="row">
-      <div class="col-lg-1">
-
-<<<<<<< HEAD
-    <section>
-        <div class="container-fluid" style="margin-top: 50px; margin-bottom: 50px;">
-            <div class="row">
-                <div class="col-md-7">
-                    <div class="imgdetail">
-                        <img src="/static/kintamani.jpg" alt="" width="100%">
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="TempatWisata">
-                        <p>Kintamani</p>
-                    </div>
-                    <div class="IsiWisata">
-                        <p> Harga Tiket : Rp. 1.000.000</p>
-                        <div class="form">
-                            <form>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="nama" placeholder="Nama">
-                                    <label for="nama">Nama</label>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="kontak" placeholder="Kontak">
-                                    <label for="kontak">Kontak</label>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <select class="form-select" id="tiket" aria-label="Floating label select example">
-                                      <option selected>Jumlah Ticket</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
-                                      <option value="6">6</option>
-                                      <option value="7">7</option>
-                                      <option value="8">8</option>
-                                      <option value="9">9</option>
-                                      <option value="10">10</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <select class="form-select" id="paket" aria-label="Floating label select example">
-                                      <option selected>Pilih Paket Tour</option>
-                                      <option value="1">Tour</option>
-                                      <option value="2">Tour & Documentation</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-floating mb-3 bg-danger">
-                                    <input style="width: 100%; padding: 10px;" type="date" id="tanggal" name="tanggal" required>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="nama" placeholder="Nama">
-                                    <label for="totalharga"> Total Harga : 1.000.000</label>
-                                  </div>
-                                <button type="submit" class="btn btn-primary">Booking</button>
-                              </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Content -->
+    <section class="deskripsi">
+      <div class="wrapper">
+        <img src="/static/kintamani.jpg" width="100%" alt="" />
+        <div class="text-box">
+          <h2>Pesona Wisata Kintamani</h2>
+          <h5>Harga Tiket : Rp 1.000.000</h5>
+          <p style="text-align: justify">
+            Kintamani merupakan daerah wisata Bali yang menyediakan pemandangan
+            alam pegunungan dataran tinggi dengan udara yang cukup segar.
+            Hembusan udara yang menerpa kulit melalui celah hijau hamparan
+            pepohonan yang berjejer disepanjang jalan menuju kintamani membuat
+            perjalanan terasa menyenangkan. Keindahan alam mulai terasa ketika
+            Gunung Batur yang berdiri gagah dari kejauhan menyambut sejuk dengan
+            punuh wibawa. Sambutan yang begitu damai dengan cerahnya sinar surya
+            berbalut birunya langit bertaburkan awan di sekitar Gunung
+            menjadikan perjalanan wisata ini begitu memikat.
+          </p>
         </div>
+      </div>
     </section>
-    <hr>
 
-    <section>
-        <div class="container-fluid" style="margin-top: 80px; margin-bottom: 50px;">
-            <div class="row">
-                <div class="col-lg-1">
+    <section class="booking">
+      <h3 class="text-center mb-3" style="margin-bottom: 10px;">
+        Wujudkan Impian Liburanmu Sekarang Juga Bersama MeBest Travel!
+      </h3>
+      <form style="margin-top: 45px;" action="" method="">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama" required />
 
-                </div>
-                <div class="col-lg-10">
-                    <div class="TempatWisata">
-                        <div class="text-center">
-                        </div>
-                    </div>
-                    <div class="deskripsi">
-                        <p>Kintamani merupakan salah satu tempat wisata terbaik di bali, yang menyediakan pemandangan alam yang menakjubkan seperti danau dan gunung batur, selain itu kintamani juga bisa memberikan pengunjung dengan sejuknya udara disana serta, serta memberikan sunsrise yang memukau saat pagi dengan lautan awan di sekeliling gunung batur.</p>
-                    </div>
-                </div>
-                <div class="col-lg-1">
+        <label for="no_telp">No.Telepon:</label>
+        <input type="tel" id="no_telp" name="no_telp" required />
 
-                </div>
-            </div>
-        </div>
+        <label for="jumlah_tiket">Jumlah Tiket:</label>
+        <input type="number" id="jumlah_tiket" name="jumlah_tiket" required />
+
+        <label for="jenis_paket">Jenis Paket:</label>
+        <select id="jenis_paket" name="jenis_paket" required>
+          <option selected disabled>-- Pilih Jenis Paket --</option>
+          <option value="tour">Tour</option>
+          <option value="tour_dokumentasi">Tour + Dokumentasi</option>
+        </select>
+
+        <label for="tanggal_tour">Tanggal Tour:</label>
+        <input type="date" id="tanggal_tour" name="tanggal_tour" required />
+
+        <h5 class="text-center">Total Harga : Rp 1.000.000</h5>
+        <button type="submit">Booking</button>
+      </form>
     </section>
-    <!-- EndContent -->
 
     <!-- footer -->
     <footer>
@@ -254,19 +146,23 @@
           <div class="col-lg-4 col-md-12">
             <img src="/static/logo.png" width="200px" alt="" />
             <p class="mt-3" style="text-align: justify">
-              Dengan menggunakan Me Best Travel, pengguna dapat dengan mudah merencanakan perjalanan wisata mereka tanpa harus repot mencari informasi dari berbagai sumber yang berbeda. Semua informasi dan layanan yang dibutuhkan dapat ditemukan dalam satu platform yang terpercaya dan terupdate.
+              Dengan menggunakan Me Best Travel, pengguna dapat dengan mudah
+              merencanakan perjalanan wisata mereka tanpa harus repot mencari
+              informasi dari berbagai sumber yang berbeda. Semua informasi dan
+              layanan yang dibutuhkan dapat ditemukan dalam satu platform yang
+              terpercaya dan terupdate.
             </p>
           </div>
           <div class="col-lg-2 col-md-12 offset-lg-2 offset-md-0">
             <h5 style="color: white">Feature</h5>
             <div class="mt-5">
-              <a style="text-decoration: none" href=""
+              <a style="text-decoration: none" href="/about"
                 ><p style="color: #252525">About</p></a
               >
-              <a style="text-decoration: none" href=""
+              <a style="text-decoration: none" href="/documentation"
                 ><p style="color: #252525">Documentation</p></a
               >
-              <a style="text-decoration: none" href=""
+              <a style="text-decoration: none" href="/tours"
                 ><p style="color: #252525">Tours</p></a
               >
             </div>
@@ -284,103 +180,42 @@
               <a style="text-decoration: none" href=""
                 ><p style="color: #252525">Kontak : 081237085281</p></a
               >
-              
             </div>
-=======
-      </div>
-      <div class="col-lg-10">
-        <div class="TempatWisata">
-          <div class="text-center">
-            <p>Kintamani</p>
->>>>>>> 9c7a12f205c663cf31843e115d23ef12945eba6f
           </div>
         </div>
-        <div class="deskripsi">
-          <p>Kintamani merupakan salah satu tempat wisata terbaik di bali, yang menyediakan pemandangan alam yang
-            menakjubkan seperti danau dan gunung batur, selain itu kintamani juga bisa memberikan pengunjung dengan
-            sejuknya udara disana serta, serta memberikan sunsrise yang memukau saat pagi dengan lautan awan di
-            sekeliling gunung batur.</p>
-        </div>
       </div>
-      <div class="col-lg-1">
+    </footer>
+    <!-- end footer -->
 
-      </div>
-    </div>
-  </div>
-</section>
-<!-- EndContent -->
+    <script>
+      window.onscroll = function () {
+        scrollFunction();
+      };
 
-<!-- footer -->
-<footer>
-  <div class="container-fluid py-5" style="background-color: orange">
-    <div class="row px-5">
-      <div class="col-lg-4 col-md-12">
-        <img src="/static/logo.png" width="200px" alt="" />
-        <p class="mt-3" style="text-align: justify">
-          Dengan menggunakan Me Best Travel, pengguna dapat dengan mudah merencanakan perjalanan wisata mereka tanpa
-          harus repot mencari informasi dari berbagai sumber yang berbeda. Semua informasi dan layanan yang dibutuhkan
-          dapat ditemukan dalam satu platform yang terpercaya dan terupdate.
-        </p>
-      </div>
-      <div class="col-lg-2 col-md-12 offset-lg-2 offset-md-0">
-        <h5 style="color: white">Feature</h5>
-        <div class="mt-5">
-          <a style="text-decoration: none" href="">
-            <p style="color: #252525">About</p>
-          </a>
-          <a style="text-decoration: none" href="">
-            <p style="color: #252525">Documentation</p>
-          </a>
-          <a style="text-decoration: none" href="">
-            <p style="color: #252525">Tours</p>
-          </a>
-        </div>
-      </div>
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 80 ||
+          document.documentElement.scrollTop > 80
+        ) {
+          document.getElementById("navbar").style.backgroundColor = "orange";
+          document.getElementById("active").style.color = "#ffffff";
+          document.getElementById("active").style.borderBottom =
+            "2px solid #ffffff";
+        } else {
+          document.getElementById("navbar").style.backgroundColor =
+            "transparent";
+          document.getElementById("navbar").style.transition = "0.3s";
+          document.getElementById("active").style.color = "#ffa500";
+          document.getElementById("active").style.borderBottom =
+            "2px solid #ffa500";
+        }
+      }
+    </script>
 
-      <div class="col-lg-4 col-md-12">
-        <h5 style="color: white">Sosial Media</h5>
-        <div class="mt-5">
-          <a style="text-decoration: none" href="">
-            <p style="color: #252525">Facebook : MeBest Travel</p>
-          </a>
-          <a style="text-decoration: none" href="">
-            <p style="color: #252525">Instagram : MeBest_Travel</p>
-          </a>
-          <a style="text-decoration: none" href="">
-            <p style="color: #252525">Kontak : 081237085281</p>
-          </a>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-<!-- end footer -->
-
-<script>
-  window.onscroll = function () {
-    scrollFunction();
-  };
-
-  function scrollFunction() {
-    if (
-      document.body.scrollTop > 80 ||
-      document.documentElement.scrollTop > 80
-    ) {
-      document.getElementById("navbar").style.backgroundColor = "orange";
-      document.getElementById("active").style.color = "#ffffff";
-      document.getElementById("active").style.borderBottom = "2px solid #ffffff";
-    } else {
-      document.getElementById("navbar").style.backgroundColor = "transparent";
-      document.getElementById("navbar").style.transition = "0.3s";
-      document.getElementById("active").style.color = "#ffa500";
-      document.getElementById("active").style.borderBottom = "2px solid #ffa500";
-    }
-  }
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
