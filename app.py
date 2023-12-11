@@ -15,12 +15,23 @@ client = MongoClient(
 
 db = client.mebest
 
+SECRET_KEY = 'Mebest'
+
+TOKEN_KEY = 'token_mebest'
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        pass
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for('to_login', msg="Ada masalah saat kamu login"))
 
 
 @app.route('/tours')
@@ -66,7 +77,24 @@ def login():
         'username': username_receive,
         'password': password_hash
     })
-    print(result)
+    if (result):
+        payload = {
+            'id': result['nickname'],
+            'role': result['role'],
+            'exp': datetime.utcnow() + timedelta(seconds=60*60)
+        }
+        print(payload['exp'])
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        return jsonify({
+            'result': 'success',
+            'token': token,
+            'token_key': TOKEN_KEY,
+        })
+    else:
+        return jsonify({
+            'result': 'failed',
+            'msg': 'username dan password tidak ditemukan di database'
+        })
 
 
 @app.route('/register', methods=['POST'])
