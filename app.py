@@ -168,10 +168,12 @@ def allowed_file(filename):
 
 @app.route('/add_tour', methods=['POST'])
 def add_tour():
+    print('success')
     if request.method == 'POST':
         tour_title = request.form['tourTitle']
         tour_description = request.form['tourDescription']
         tour_price = float(request.form['tourPrice'])
+        print(tour_title, tour_description, tour_price)
         # Menangani pengunggahan file
         if 'tourImage' not in request.files:
             return jsonify({'result': 'failed', 'msg': 'Tidak ada bagian file'})
@@ -193,6 +195,8 @@ def add_tour():
                 'price': tour_price,
                 'image_path': file_path
             })
+
+            print('success')
 
             return jsonify({'result': 'success', 'msg': 'Tour berhasil ditambahkan'})
 
