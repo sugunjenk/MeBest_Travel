@@ -25,10 +25,11 @@ app = Flask(__name__)
 def index():
     token_receive = request.cookies.get(TOKEN_KEY)
     try:
-        pass
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('index.html')
 
     except jwt.ExpiredSignatureError:
-        return redirect(url_for('to_login', msg="Silahkan Login Kembali"))
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for('to_login', msg="Ada masalah saat kamu login"))
 
@@ -62,7 +63,8 @@ def to_register():
 
 @app.route("/to_login", methods=['GET'])
 def to_login():
-    return render_template('login.html')
+    msg = request.args.get('msg')
+    return render_template('login.html', msg=msg)
 
 
 @app.route('/login', methods=['POST'])
