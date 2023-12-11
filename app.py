@@ -9,6 +9,8 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask import request, redirect, url_for
+from bson import ObjectId
+from flask import abort
 
 client = MongoClient(
     "mongodb+srv://admin:admin123@mebesttravel.75vrujy.mongodb.net/?retryWrites=true&w=majority")
@@ -36,7 +38,8 @@ def index():
 
 @app.route('/tours')
 def tours():
-    return render_template('tours.html')
+    tours_data = db.tours.find()
+    return render_template('tours.html', tours_data=tours_data)
 
 
 @app.route('/documentation')
@@ -176,6 +179,111 @@ def add_tour():
             })
 
             return jsonify({'result': 'success', 'msg': 'Tour berhasil ditambahkan'})
+
+    return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+
+@app.route('/edit_tour', methods=['POST'])
+def edit_tour():
+    if request.method == 'POST':
+        tour_id = request.form['editTourId']
+        tour_title = request.form['editTourTitle']
+        tour_description = request.form['editTourDescription']
+        tour_price = float(request.form['editTourPrice'])
+        # Implementasi pengeditan data di database
+        db.tours.update_one(
+            {'_id': ObjectId(tour_id)},
+            {'$set': {
+                'title': tour_title,
+                'description': tour_description,
+                'price': tour_price
+                # Anda mungkin perlu menambahkan pembaruan lain sesuai kebutuhan
+            }}
+        )
+        return jsonify({'result': 'success', 'msg': 'Tour berhasil diubah'})
+
+    return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+
+@app.route('/get_tour_details', methods=['GET'])
+def get_tour_details():
+    tour_id = request.args.get('id')
+    tour_details = db.tours.find_one({'_id': ObjectId(tour_id)})
+    return jsonify({
+        'title': tour_details['title'],
+        'description': tour_details['description'],
+        'price': tour_details['price']
+        # Anda mungkin perlu menambahkan detail lain sesuai kebutuhan
+    })
+
+from bson import ObjectId
+
+# ...
+
+@app.route('/update_tour', methods=['POST'])
+def update_tour():
+    if request.method == 'POST':
+        # Ambil data dari formulir
+        tour_id = request.form['editTourId']
+        new_title = request.form['editTourTitle']
+        new_description = request.form['editTourDescription']
+        new_price = float(request.form['editTourPrice'])
+        new_image = request.files['editTourImage']
+
+        # Menggunakan ObjectId dari pymongo untuk mencocokkan _id di database
+        tour_object_id = ObjectId(tour_id)
+
+        # Proses pembaruan data di database
+        # Perbarui data berdasarkan _id
+        db.tours.update_one(
+            {'_id': tour_object_id},
+            {
+                '$set': {
+                    'title': new_title,
+                    'description': new_description,
+                    'price': new_price,
+                    
+                }
+            }
+        )
+
+        
+        if new_image:
+            filename = secure_filename(new_image.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            new_image.save(file_path)
+
+            db.tours.update_one(
+                {'_id': tour_object_id},
+                {
+                    '$set': {
+                        'image_path': file_path
+                    }
+                }
+            )
+
+        return jsonify({'result': 'success', 'msg': 'Tour berhasil diperbarui'})
+
+    return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+
+@app.route('/delete_tour', methods=['POST'])
+def delete_tour():
+    if request.method == 'POST':
+        tour_id = request.form['deleteTourId']
+
+        # Menggunakan ObjectId dari pymongo untuk mencocokkan _id di database
+        tour_object_id = ObjectId(tour_id)
+
+        # Hapus data tour dari database berdasarkan _id
+        deleted_tour = db.tours.find_one_and_delete({'_id': tour_object_id})
+
+        if deleted_tour:
+            # Hapus juga file gambar yang terkait jika ada
+            image_path = deleted_tour.get('image_path')
+            if image_path:
+                os.remove(image_path)
+
+            return jsonify({'result': 'success', 'msg': 'Tour berhasil dihapus'})
+        else:
+            return jsonify({'result': 'failed', 'msg': 'Tour tidak ditemukan'})
 
     return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
 

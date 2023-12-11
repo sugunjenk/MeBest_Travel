@@ -144,273 +144,51 @@
         style="margin-top: 50px; margin-bottom: 50px"
       >
         <div class="row">
-          <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3">
-            <div class="card shadow" style="width: 18rem">
-              <div class="cardImage">
-                <img src="/static/kintamani.jpg" class="card-img-top" alt="..." />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Kintamani</h5>
-                <p class="card-text">
-                  Kintamani, tempat wisata terbaik di Bali dengan pemandangan
-                  alam yang menakjubkan...
-                </p>
-                <div class="text-center">
-                  <a href="#" class="btn btn-primary">Cek Selengkapnya</a>
-                  <p></p>
+          {% for tour in tours_data %}
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3">
+              <div class="card shadow" style="width: 18rem">
+                <div class="cardImage">
+                  <img src="{{ tour.image_path }}" class="card-img-top" alt="Tour Image" />
                 </div>
-                <div class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTourModal"
-                    data-id="1"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteTourModal"
-                    data-id="1"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3">
-            <div class="card shadow" style="width: 18rem">
-              <div class="cardImage">
-                <img src="/static/kintamani.jpg" class="card-img-top" alt="..." />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Kintamani</h5>
-                <p class="card-text">
-                  Kintamani, tempat wisata terbaik di Bali dengan pemandangan
-                  alam yang menakjubkan...
-                </p>
-                <div class="text-center">
-                  <a href="#" class="btn btn-primary">Cek Selengkapnya</a>
-                  <p></p>
-                </div>
-                <div class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTourModal"
-                    data-id="1"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteTourModal"
-                    data-id="1"
-                  >
-                    Delete
-                  </button>
+                <div class="card-body">
+                  <h5 class="card-title">{{ tour.title }}</h5>
+                  <p class="card-text">
+                    {% set words = tour.description.split() %}
+                    {% if words | length > 11 %}
+                      {{ ' '.join(words[:11]) + '...' }}
+                    {% else %}
+                      {{ tour.description }}
+                    {% endif %}
+                  </p>
+                  <p class="card-text">Price: {{ tour.price }}</p>
+                  <div class="text-center">
+                    <a href="#" class="btn btn-primary">Details</a>
+                    <p></p>
+                  </div>
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-warning"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editTourModal"
+                      data-id="{{ tour._id }}"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteTourModal"
+                      data-id="{{ tour._id }}"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3">
-            <div class="card shadow" style="width: 18rem">
-              <div class="cardImage">
-                <img src="/static/kintamani.jpg" class="card-img-top" alt="..." />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Kintamani</h5>
-                <p class="card-text">
-                  Kintamani, tempat wisata terbaik di Bali dengan pemandangan
-                  alam yang menakjubkan...
-                </p>
-                <div class="text-center">
-                  <a href="#" class="btn btn-primary">Cek Selengkapnya</a>
-                  <p></p>
-                </div>
-                <div class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTourModal"
-                    data-id="1"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteTourModal"
-                    data-id="1"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3">
-            <div class="card shadow" style="width: 18rem">
-              <div class="cardImage">
-                <img src="/static/kintamani.jpg" class="card-img-top" alt="..." />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Kintamani</h5>
-                <p class="card-text">
-                  Kintamani, tempat wisata terbaik di Bali dengan pemandangan
-                  alam yang menakjubkan...
-                </p>
-                <div class="text-center">
-                  <a href="#" class="btn btn-primary">Cek Selengkapnya</a>
-                  <p></p>
-                </div>
-                <div class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTourModal"
-                    data-id="1"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteTourModal"
-                    data-id="1"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3">
-            <div class="card shadow" style="width: 18rem">
-              <div class="cardImage">
-                <img src="/static/kintamani.jpg" class="card-img-top" alt="..." />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Kintamani</h5>
-                <p class="card-text">
-                  Kintamani, tempat wisata terbaik di Bali dengan pemandangan
-                  alam yang menakjubkan...
-                </p>
-                <div class="text-center">
-                  <a href="#" class="btn btn-primary">Cek Selengkapnya</a>
-                  <p></p>
-                </div>
-                <div class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTourModal"
-                    data-id="1"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteTourModal"
-                    data-id="1"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3">
-            <div class="card shadow" style="width: 18rem">
-              <div class="cardImage">
-                <img src="/static/kintamani.jpg" class="card-img-top" alt="..." />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Kintamani</h5>
-                <p class="card-text">
-                  Kintamani, tempat wisata terbaik di Bali dengan pemandangan
-                  alam yang menakjubkan...
-                </p>
-                <div class="text-center">
-                  <a href="#" class="btn btn-primary">Cek Selengkapnya</a>
-                  <p></p>
-                </div>
-                <div class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTourModal"
-                    data-id="1"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteTourModal"
-                    data-id="1"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3">
-            <div class="card shadow" style="width: 18rem">
-              <div class="cardImage">
-                <img src="/static/kintamani.jpg" class="card-img-top" alt="..." />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Kintamani</h5>
-                <p class="card-text">
-                  Kintamani, tempat wisata terbaik di Bali dengan pemandangan
-                  alam yang menakjubkan...
-                </p>
-                <div class="text-center">
-                  <a href="#" class="btn btn-primary">Cek Selengkapnya</a>
-                  <p></p>
-                </div>
-                <div class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTourModal"
-                    data-id="1"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteTourModal"
-                    data-id="1"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+          {% endfor %}
         </div>
       </div>
     </section>
@@ -514,77 +292,39 @@
     <!-- Modal Edit Tour -->
 
     <!-- EndContent -->
-    <div
-      class="modal fade"
-      id="editTourModal"
-      tabindex="-1"
-      aria-labelledby="editTourModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="editTourModal" tabindex="-1" aria-labelledby="editTourModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editTourModalLabel">Edit Tour</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="editTourModalLabel">Edit Tour</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form id="editTourForm" action="/update_tour" method="post" enctype="multipart/form-data">
+                      <input type="hidden" id="editTourId" name="editTourId" value="" />
+                      <div class="mb-3">
+                          <label for="editTourTitle" class="form-label">Tour Title</label>
+                          <input type="text" class="form-control" id="editTourTitle" name="editTourTitle" required />
+                      </div>
+                      <div class="mb-3">
+                          <label for="editTourDescription" class="form-label">Tour Description</label>
+                          <textarea class="form-control" id="editTourDescription" name="editTourDescription" rows="3" required></textarea>
+                      </div>
+                      <div class="mb-3">
+                          <label for="editTourPrice" class="form-label">Tour Price</label>
+                          <input type="number" class="form-control" id="editTourPrice" name="editTourPrice" required />
+                      </div>
+                      <div class="mb-3">
+                          <label for="editTourImage" class="form-label">Upload Image</label>
+                          <input type="file" class="form-control" id="editTourImage" name="editTourImage" accept="image/*" required />
+                      </div>
+                      <button type="submit" class="btn btn-warning">Save Changes</button>
+                  </form>
+              </div>
           </div>
-          <div class="modal-body">
-            <form id="editTourForm">
-              <div class="mb-3">
-                <label for="editTourTitle" class="form-label">Tour Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editTourTitle"
-                  name="editTourTitle"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="editTourDescription" class="form-label"
-                  >Tour Description</label
-                >
-                <textarea
-                  class="form-control"
-                  id="editTourDescription"
-                  name="editTourDescription"
-                  rows="3"
-                  required
-                ></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="editTourPrice" class="form-label">Tour Price</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="editTourPrice"
-                  name="editTourPrice"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="editTourImage" class="form-label">Upload Image</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="editTourImage"
-                  name="editTourImage"
-                  accept="image/*"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-warning">
-                Save Changes
-              </button>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
+
 
     <!-- Modal Delete Tours -->
     <div
@@ -646,16 +386,39 @@
         var button = $(event.relatedTarget);
         var tourId = button.data("id");
 
-        $("#editTourTitle").val("Tour " + tourId);
-        $("#editTourDescription").val("Description of Tour " + tourId);
-        $("#editTourPrice").val();
+        // Mengisi nilai sebelumnya pada modal
+        $("#editTourId").val(tourId);
+        $("#editTourTitle").val(button.closest(".card").find(".card-title").text());
+        $("#editTourDescription").val(button.closest(".card").find(".card-text:first").text());
+        $("#editTourPrice").val(button.closest(".card").find(".card-text:last").text());
+        
+        // Menampilkan gambar saat ini
+        var currentImage = button.closest(".card").find("img").attr("src");
+        $("#currentTourImage").attr("src", currentImage);
       });
 
-      $("#deleteTourModal").on("show.bs.modal", function (event) {
-        var button = $(event.relatedTarget);
-        var tourId = button.data("id");
 
-        $("#deleteTourModal").data("id", tourId);
+      $(document).on("click", "#confirmDeleteTour", function () {
+        var tourId = $("#deleteTourModal").data("id");
+
+        // Menggunakan AJAX untuk menghapus tour
+        $.ajax({
+          type: 'POST',
+          url: '/delete_tour',
+          data: {'deleteTourId': tourId},
+          success: function(response) {
+            if (response.result === 'success') {
+              // Refresh halaman setelah menghapus tour
+              location.reload();
+            } else {
+              alert('Gagal menghapus tour: ' + response.msg);
+            }
+          },
+          error: function(error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat menghapus tour');
+          }
+        });
       });
     </script>
 
