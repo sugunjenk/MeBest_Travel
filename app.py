@@ -26,14 +26,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # token_receive = request.cookies.get(TOKEN_KEY)
-    # try:
-    #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-
-    # except jwt.ExpiredSignatureError:
-    #     return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
-    # except jwt.exceptions.DecodeError:
-    #     return redirect(url_for('to_login', msg="Ada masalah saat kamu login"))
     return render_template('index.html')
 
 
@@ -58,7 +50,18 @@ def documentation():
 
 @app.route('/cek_pesanan')
 def cek_pesanan():
-    return render_template('cekPesanan.html')
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        # 'id': result['nickname'],
+        # 'role': result['role'],
+        # 'exp': datetime.utcnow() + timedelta(seconds=60*60)
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('cekPesanan.html', payloads=payload)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for('to_login', msg="Anda belum login"))
 
 
 @app.route('/about')
