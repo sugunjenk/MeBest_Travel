@@ -41,6 +41,9 @@ def tours():
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for('to_login', msg="Anda belum login"))
+    result = request.args.get('result', '')
+    tours_data = []  # You need to populate this with actual data from your database
+    return render_template('tours.html', tours_data=tours_data, result=result)
 
 
 @app.route('/documentation')
@@ -168,13 +171,12 @@ def allowed_file(filename):
 
 @app.route('/add_tour', methods=['POST'])
 def add_tour():
-    print('success')
     if request.method == 'POST':
         tour_title = request.form['tourTitle']
         tour_description = request.form['tourDescription']
         tour_price = float(request.form['tourPrice'])
         print(tour_title, tour_description, tour_price)
-        # Menangani pengunggahan file
+
         if 'tourImage' not in request.files:
             return jsonify({'result': 'failed', 'msg': 'Tidak ada bagian file'})
 
@@ -198,9 +200,11 @@ def add_tour():
 
             print('success')
 
-            return jsonify({'result': 'success', 'msg': 'Tour berhasil ditambahkan'})
+            # Redirect to the tours page with success message as a query parameter
+            return redirect(url_for('tours', result='success'))
 
-    return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+    # Redirect to the tours page with failure message as a query parameter
+    return redirect(url_for('tours', result='failed'))
 
 
 @app.route('/edit_tour', methods=['POST'])
@@ -233,11 +237,9 @@ def get_tour_details():
         'title': tour_details['title'],
         'description': tour_details['description'],
         'price': tour_details['price']
-        # Anda mungkin perlu menambahkan detail lain sesuai kebutuhan
+        
     })
 
-
-# ...
 
 
 @app.route('/update_tour', methods=['POST'])
@@ -250,11 +252,10 @@ def update_tour():
         new_price = float(request.form['editTourPrice'])
         new_image = request.files['editTourImage']
 
-        # Menggunakan ObjectId dari pymongo untuk mencocokkan _id di database
+       
         tour_object_id = ObjectId(tour_id)
 
-        # Proses pembaruan data di database
-        # Perbarui data berdasarkan _id
+        
         db.tours.update_one(
             {'_id': tour_object_id},
             {
