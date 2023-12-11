@@ -26,21 +26,29 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    token_receive = request.cookies.get(TOKEN_KEY)
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('index.html')
+    # token_receive = request.cookies.get(TOKEN_KEY)
+    # try:
+    #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
 
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for('to_login', msg="Ada masalah saat kamu login"))
+    # except jwt.ExpiredSignatureError:
+    #     return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    # except jwt.exceptions.DecodeError:
+    #     return redirect(url_for('to_login', msg="Ada masalah saat kamu login"))
+    return render_template('index.html')
 
 
 @app.route('/tours')
 def tours():
-    tours_data = db.tours.find()
-    return render_template('tours.html', tours_data=tours_data)
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        tours_data = db.tours.find()
+        return render_template('tours.html', tours_data=tours_data, payloads=payload)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for('to_login', msg="Anda belum login"))
 
 
 @app.route('/documentation')
@@ -148,16 +156,19 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Fungsi untuk memeriksa apakah ekstensi file diizinkan
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/add_tour', methods=['POST'])
 def add_tour():
     if request.method == 'POST':
         tour_title = request.form['tourTitle']
         tour_description = request.form['tourDescription']
-        tour_price = float(request.form['tourPrice'])  
+        tour_price = float(request.form['tourPrice'])
         # Menangani pengunggahan file
         if 'tourImage' not in request.files:
             return jsonify({'result': 'failed', 'msg': 'Tidak ada bagian file'})
@@ -177,12 +188,13 @@ def add_tour():
                 'title': tour_title,
                 'description': tour_description,
                 'price': tour_price,
-                'image_path': file_path  
+                'image_path': file_path
             })
 
             return jsonify({'result': 'success', 'msg': 'Tour berhasil ditambahkan'})
 
     return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+
 
 @app.route('/edit_tour', methods=['POST'])
 def edit_tour():
@@ -205,6 +217,7 @@ def edit_tour():
 
     return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
 
+
 @app.route('/get_tour_details', methods=['GET'])
 def get_tour_details():
     tour_id = request.args.get('id')
@@ -216,9 +229,9 @@ def get_tour_details():
         # Anda mungkin perlu menambahkan detail lain sesuai kebutuhan
     })
 
-from bson import ObjectId
 
 # ...
+
 
 @app.route('/update_tour', methods=['POST'])
 def update_tour():
@@ -242,12 +255,11 @@ def update_tour():
                     'title': new_title,
                     'description': new_description,
                     'price': new_price,
-                    
+
                 }
             }
         )
 
-        
         if new_image:
             filename = secure_filename(new_image.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -265,6 +277,7 @@ def update_tour():
         return jsonify({'result': 'success', 'msg': 'Tour berhasil diperbarui'})
 
     return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+
 
 @app.route('/delete_tour', methods=['POST'])
 def delete_tour():
@@ -288,7 +301,6 @@ def delete_tour():
             return jsonify({'result': 'failed', 'msg': 'Tour tidak ditemukan'})
 
     return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
-
 
 
 if __name__ == '__main__':
