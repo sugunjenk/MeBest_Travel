@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
+from flask import request, redirect, url_for
 
 client = MongoClient(
     "mongodb+srv://admin:admin123@mebesttravel.75vrujy.mongodb.net/?retryWrites=true&w=majority")
@@ -106,6 +107,50 @@ def register():
 @app.route('/detail_tours')
 def detail_tours():
     return render_template('detail.html')
+
+
+UPLOAD_FOLDER = 'static'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Fungsi untuk memeriksa apakah ekstensi file diizinkan
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/add_tour', methods=['POST'])
+def add_tour():
+    if request.method == 'POST':
+        tour_title = request.form['tourTitle']
+        tour_description = request.form['tourDescription']
+        tour_price = float(request.form['tourPrice'])  
+        # Menangani pengunggahan file
+        if 'tourImage' not in request.files:
+            return jsonify({'result': 'failed', 'msg': 'Tidak ada bagian file'})
+
+        file = request.files['tourImage']
+
+        if file.filename == '':
+            return jsonify({'result': 'failed', 'msg': 'Tidak ada file yang dipilih'})
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+
+            # Memasukkan data ke dalam database
+            db.tours.insert_one({
+                'title': tour_title,
+                'description': tour_description,
+                'price': tour_price,
+                'image_path': file_path  
+            })
+
+            return jsonify({'result': 'success', 'msg': 'Tour berhasil ditambahkan'})
+
+    return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+
 
 
 if __name__ == '__main__':
