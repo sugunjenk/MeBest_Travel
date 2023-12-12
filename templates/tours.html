@@ -312,9 +312,15 @@
       $("#currentTourImage").attr("src", currentImage);
     });
 
+    $("#deleteTourModal").on("show.bs.modal", function (event) {
+      var button = $(event.relatedTarget);
+      var tourId = button.data("id");
+      $("#confirmDeleteTour").val(tourId);
+    });
+
 
     $(document).on("click", "#confirmDeleteTour", function () {
-        var tourId = $("#deleteTourModal").data("id");
+        var tourId = $("#confirmDeleteTour").val();
 
         // Gunakan AJAX untuk menghapus data tur
         $.ajax({
@@ -326,6 +332,7 @@
                     // Muat ulang halaman setelah menghapus tur
                     location.reload();
                 } else {
+                    console.log(response)
                     alert('Gagal menghapus tur: ' + response.msg);
                 }
             },

@@ -102,6 +102,7 @@ def login():
     if (result):
         payload = {
             'id': result['nickname'],
+            '_id': str(result['_id']),
             'role': result['role'],
             'exp': datetime.utcnow() + timedelta(seconds=60*60)
         }
@@ -294,24 +295,50 @@ def update_tour():
 
 @app.route('/delete_tour', methods=['POST'])
 def delete_tour():
-    if request.method == 'POST':
-        try:
-            tour_id = request.form['deleteTourId']
+  if request.method == 'POST':
+    try:
+      tour_id = request.form['deleteTourId']
 
-            # Gunakan ObjectId dari pymongo untuk mencocokkan _id di database
-            tour_object_id = ObjectId(tour_id)
+      # Gunakan ObjectId dari pymongo untuk mencocokkan _id di database
+      tour_object_id = ObjectId(tour_id)
 
-            # Hapus data tur dari database berdasarkan _id
-            deleted_tour = db.tours.find_one_and_delete({'_id': tour_object_id})
+      # Hapus data tur dari database berdasarkan _id
+      deleted_tour = db.tours.find_one_and_delete({'_id': tour_object_id})
 
-            if deleted_tour:
-                return jsonify({'result': 'success', 'msg': 'Tur berhasil dihapus'})
-            else:
-                return jsonify({'result': 'failed', 'msg': 'Tur tidak ditemukan'})
-        except Exception as e:
-            return jsonify({'result': 'failed', 'msg': str(e)})
+      if deleted_tour:
+        return jsonify({'result': 'success', 'msg': 'Tur berhasil dihapus'})
+      else:
+        return jsonify({'result': 'failed', 'msg': 'Tur tidak ditemukan'})
+    except Exception as e:
+      return jsonify({'result': 'failed', 'msg': str(e)})
 
-    return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+  return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+
+@app.route('/booking', methods=['POST'])
+def booking_tour():
+    tour = ObjectId(request.form['tour'])
+    nama = request.form['nama']
+    no_telp = request.form['no_telp']
+    jumlah_tiket = int(request.form['jumlah_tiket'])
+    jenis_paket = request.form['jenis_paket']
+    tanggal_tour = request.form['tanggal_tour']
+    no_telp = request.form['no_telp']
+
+    token_receive = request.cookies.get(TOKEN_KEY)
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_id = ObjectId(payload['_id'])
+
+    db.orders.insert_one({
+      'nama': nama,
+      'no_telp': no_telp,
+      'jumlah_tiket': jumlah_tiket,
+      'jenis_paket': jenis_paket,
+      'tanggal_tour': tanggal_tour,
+      'tour_id': tour,
+      'user_id': user_id
+    })
+
+    return redirect('cek_pesanan')
 
 
 if __name__ == '__main__':

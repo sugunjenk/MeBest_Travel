@@ -106,7 +106,8 @@
       <h3 class="text-center mb-3" style="margin-bottom: 10px;">
         Wujudkan Impian Liburanmu Sekarang Juga Bersama MeBest Travel!
       </h3>
-      <form style="margin-top: 45px;" action="" method="">
+      <form style="margin-top: 45px;" action="/booking" method="post">
+        <input type="hidden" name="tour" value="{{tour_details._id }}">
         <label for="nama">Nama:</label>
         <input type="text" id="nama" name="nama" required />
 
