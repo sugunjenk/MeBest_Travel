@@ -28,30 +28,45 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Ambil 4 data terbaru dari koleksi tours
-    tours_data = db.tours.find().limit(4).sort('_id', -1)
-    return render_template('index.html', tours_data=tours_data)
-
-
-@app.route('/tours')
-def tours():
     token_receive = request.cookies.get(TOKEN_KEY)
+    tours_data = db.tours.find().limit(4).sort('_id', -1)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        tours_data = db.tours.find()
-        return render_template('tours.html', tours_data=tours_data, payloads=payload)
+        return render_template('index.html', tours_data=tours_data, payloads=payload)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
     except jwt.exceptions.DecodeError:
-        return redirect(url_for('to_login', msg="Anda belum login"))
-    result = request.args.get('result', '')
+        return render_template('index.html', tours_data=tours_data)
+
+
+@app.route('/tours')
+def tours():
     tours_data = []  # You need to populate this with actual data from your database
-    return render_template('tours.html', tours_data=tours_data, result=result)
+    token_receive = request.cookies.get(TOKEN_KEY)
+    tours_data = db.tours.find()
+    result = request.args.get('result', '')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('tours.html', tours_data=tours_data, payloads=payload, result=result)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return render_template('tours.html', tours_data=tours_data, result=result)
 
 
 @app.route('/documentation')
 def documentation():
-    return render_template('documentation.html')
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('documentation.html', payloads=payload)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return render_template('documentation.html')
 
 
 @app.route('/cek_pesanan')
@@ -67,12 +82,20 @@ def cek_pesanan():
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
     except jwt.exceptions.DecodeError:
-        return redirect(url_for('to_login', msg="Anda belum login"))
+        return redirect(url_for('to_login', msg="Anda Belum Login"))
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('about.html', payloads=payload)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return render_template('about.html')
 
 # authentikasi
 
@@ -157,9 +180,17 @@ def register():
 
 @app.route('/detail_tours')
 def detail_tours():
+    token_receive = request.cookies.get(TOKEN_KEY)
     tour_id = request.args.get('id')
     tour_details = db.tours.find_one({'_id': ObjectId(tour_id)})
-    return render_template('detail.html', tour_details=tour_details)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('detail.html', tour_details=tour_details, payloads=payload)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for('to_login', msg="Anda Belum Login"))
 
 
 UPLOAD_FOLDER = 'static/img'
@@ -243,9 +274,8 @@ def get_tour_details():
         'title': tour_details['title'],
         'description': tour_details['description'],
         'price': tour_details['price']
-        
-    })
 
+    })
 
 
 @app.route('/update_tour', methods=['POST'])
@@ -258,10 +288,8 @@ def update_tour():
         new_price = float(request.form['editTourPrice'])
         new_image = request.files['editTourImage']
 
-       
         tour_object_id = ObjectId(tour_id)
 
-        
         db.tours.update_one(
             {'_id': tour_object_id},
             {
@@ -295,24 +323,26 @@ def update_tour():
 
 @app.route('/delete_tour', methods=['POST'])
 def delete_tour():
-  if request.method == 'POST':
-    try:
-      tour_id = request.form['deleteTourId']
+    if request.method == 'POST':
+        try:
+            tour_id = request.form['deleteTourId']
 
-      # Gunakan ObjectId dari pymongo untuk mencocokkan _id di database
-      tour_object_id = ObjectId(tour_id)
+            # Gunakan ObjectId dari pymongo untuk mencocokkan _id di database
+            tour_object_id = ObjectId(tour_id)
 
-      # Hapus data tur dari database berdasarkan _id
-      deleted_tour = db.tours.find_one_and_delete({'_id': tour_object_id})
+            # Hapus data tur dari database berdasarkan _id
+            deleted_tour = db.tours.find_one_and_delete(
+                {'_id': tour_object_id})
 
-      if deleted_tour:
-        return jsonify({'result': 'success', 'msg': 'Tur berhasil dihapus'})
-      else:
-        return jsonify({'result': 'failed', 'msg': 'Tur tidak ditemukan'})
-    except Exception as e:
-      return jsonify({'result': 'failed', 'msg': str(e)})
+            if deleted_tour:
+                return jsonify({'result': 'success', 'msg': 'Tur berhasil dihapus'})
+            else:
+                return jsonify({'result': 'failed', 'msg': 'Tur tidak ditemukan'})
+        except Exception as e:
+            return jsonify({'result': 'failed', 'msg': str(e)})
 
-  return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+    return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
+
 
 @app.route('/booking', methods=['POST'])
 def booking_tour():
@@ -329,13 +359,13 @@ def booking_tour():
     user_id = ObjectId(payload['_id'])
 
     db.orders.insert_one({
-      'nama': nama,
-      'no_telp': no_telp,
-      'jumlah_tiket': jumlah_tiket,
-      'jenis_paket': jenis_paket,
-      'tanggal_tour': tanggal_tour,
-      'tour_id': tour,
-      'user_id': user_id
+        'nama': nama,
+        'no_telp': no_telp,
+        'jumlah_tiket': jumlah_tiket,
+        'jenis_paket': jenis_paket,
+        'tanggal_tour': tanggal_tour,
+        'tour_id': tour,
+        'user_id': user_id
     })
 
     return redirect('cek_pesanan')

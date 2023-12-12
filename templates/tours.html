@@ -48,16 +48,36 @@
         </ul>
         <!-- nav mid -->
 
-        <!-- nav login -->
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/to_login"><button style="color: white; font-weight: 500"
-                class="Login btn btn-warning px-4 py-2">
-                Login
-              </button></a>
-          </li>
-        </ul>
-        <!-- nav login -->
+         <!-- nav login -->
+         {% if payloads %}
+         <ul class="navbar-nav ms-auto">
+           <li class="nav-item">
+             <a class="nav-link" aria-current="page"
+               ><button
+                 style="color: white; font-weight: 500"
+                 class="Login btn btn-warning px-4 py-2"
+                 onclick='logout()'
+               >
+                 Logout
+               </button></a
+             >
+           </li>
+         </ul>
+         {% else %}
+         <ul class="navbar-nav ms-auto">
+           <li class="nav-item">
+             <a class="nav-link" aria-current="page" href="/to_login"
+               ><button
+                 style="color: white; font-weight: 500"
+                 class="Login btn btn-warning px-4 py-2"
+               >
+                 Login
+               </button></a
+             >
+           </li>
+         </ul>
+         {% endif %}
+         <!-- nav login -->
       </div>
     </div>
   </nav>
@@ -148,7 +168,7 @@
                 <button class="btn btn-primary" onclick="redirectToDetails('{{ tour._id }}')">Details</button>
                 <p></p>
               </div>
-              <div class="text-center" id="button_admin_card">
+              <div class="d-none text-center" id="button_admin_card">
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editTourModal"
                         data-id="{{ tour._id }}">
                     Edit
@@ -171,7 +191,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="TambahTour">
-            <div class="text-center" id="button_admin_add">
+            <div class="d-none text-center" id="button_admin_add">
               <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#addTourModal">
                 Add Tours
               </button>
@@ -414,16 +434,24 @@
         document.getElementById("active").style.borderBottom =
           "2px solid #ffa500";
       }
+    }
 
-      $(document).ready(function () {
-        {% if payloads.role == 2 %}
-        $('.card-body #button_admin_card').addClass('d-none');
-        $('#button_admin_add').addClass('d-none');
-        {% else %}
-        $('.card-body #button_admin_card').removeClass('d-none');
-        $('#button_admin_add').removeClass('d-none');
-        {% endif %}
-      })
+    {% if payloads %}
+    $(document).ready(function () {
+      {% if payloads.role == 2 %}
+      $('.card-body #button_admin_card').addClass('d-none');
+      $('#button_admin_add').addClass('d-none');
+      {% else %}
+      $('.card-body #button_admin_card').removeClass('d-none');
+      $('#button_admin_add').removeClass('d-none');
+      {% endif %}
+    })
+    {% endif %}
+    
+    function logout(){
+      alert('Anda telah logout')
+      $.removeCookie('{{token_key}}', { path: '/' });
+      window.location.replace('/')
     }
   </script>
   <script>

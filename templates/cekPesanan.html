@@ -12,7 +12,12 @@
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
-        <!-- TODO: hide/show berdasarkan role -->
+        // TODO hide / show berdasarkan role
+        function logout() {
+            alert('Anda telah logout')
+            $.removeCookie('{{token_key}}', { path: '/' });
+            window.location.replace('/')
+        }
     </script>
     <script src="/static/JS/cekPesanan.js"></script>
 </head>
@@ -53,14 +58,25 @@
                     <!-- nav mid -->
 
                     <!-- nav login -->
+                    {% if payloads %}
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#"><button
+                            <a class="nav-link" aria-current="page"><button style="color: white; font-weight: 500"
+                                    class="Login btn btn-warning px-4 py-2" onclick='logout()'>
+                                    Logout
+                                </button></a>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/to_login"><button
                                     style="color: white; font-weight: 500" class="Login btn btn-warning px-4 py-2">
                                     Login
                                 </button></a>
                         </li>
                     </ul>
+                    {% endif %}
                     <!-- nav login -->
                 </div>
             </div>
