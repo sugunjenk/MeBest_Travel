@@ -94,8 +94,7 @@
         <img src="{{ tour_details.image_path }}" width="100%" alt="" />
         <div class="text-box">
           <h2>{{ tour_details.title }}</h2>
-          <h5>Harga Tiket : {{ tour_details.price }}</h5>
-          <p style="text-align: justify">
+          <h5>Harga Tiket : <span class="tour-price">{{ tour_details.price }}</span></h5>
             {{ tour_details.description }}
           </p>
         </div>
@@ -203,6 +202,23 @@
             "2px solid #ffa500";
         }
       }
+    </script>
+    <script>
+  
+      function formatCurrency(amount) {
+          return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+      }
+    
+      document.addEventListener('DOMContentLoaded', function () {
+          const tourPrices = document.querySelectorAll('.tour-price');
+    
+          tourPrices.forEach(function (priceElement) {
+              const price = parseFloat(priceElement.textContent);
+              priceElement.textContent = formatCurrency(price);
+          });
+      });
+    
+     
     </script>
 
     <script
