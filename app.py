@@ -26,26 +26,45 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('index.html', payloads=payload)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return render_template('index.html')
 
 
 @app.route('/tours')
 def tours():
     token_receive = request.cookies.get(TOKEN_KEY)
+    tours_data = db.tours.find()
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        tours_data = db.tours.find()
-        return render_template('tours.html', tours_data=tours_data, payloads=payload)
+        print(payload)
+        return render_template('tours.html', tours_data=tours_data, payloads=payload, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
     except jwt.exceptions.DecodeError:
-        return redirect(url_for('to_login', msg="Anda belum login"))
+        # return redirect(url_for('to_login', msg="Anda belum login"))
+        return render_template('tours.html', tours_data=tours_data)
+    # buat di tours tampil dulu baru login
 
 
 @app.route('/documentation')
 def documentation():
-    return render_template('documentation.html')
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('documentation.html', payloads=payload)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return render_template('documentation.html')
 
 
 @app.route('/cek_pesanan')
@@ -61,12 +80,20 @@ def cek_pesanan():
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
     except jwt.exceptions.DecodeError:
-        return redirect(url_for('to_login', msg="Anda belum login"))
+        return render_template('cekPesanan.html')
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        return render_template('about.html', payloads=payload)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return render_template('about.html')
 
 # authentikasi
 
