@@ -211,7 +211,7 @@ def add_tour():
     if request.method == 'POST':
         tour_title = request.form['tourTitle']
         tour_description = request.form['tourDescription']
-        tour_price = float(request.form['tourPrice'])
+        tour_price = int(request.form['tourPrice'])
         print(tour_title, tour_description, tour_price)
 
         if 'tourImage' not in request.files:
@@ -242,28 +242,6 @@ def add_tour():
 
     # Redirect to the tours page with failure message as a query parameter
     return redirect(url_for('tours', result='failed'))
-
-
-@app.route('/edit_tour', methods=['POST'])
-def edit_tour():
-    if request.method == 'POST':
-        tour_id = request.form['editTourId']
-        tour_title = request.form['editTourTitle']
-        tour_description = request.form['editTourDescription']
-        tour_price = float(request.form['editTourPrice'])
-        # Implementasi pengeditan data di database
-        db.tours.update_one(
-            {'_id': ObjectId(tour_id)},
-            {'$set': {
-                'title': tour_title,
-                'description': tour_description,
-                'price': tour_price
-                # Anda mungkin perlu menambahkan pembaruan lain sesuai kebutuhan
-            }}
-        )
-        return jsonify({'result': 'success', 'msg': 'Tour berhasil diubah'})
-
-    return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
 
 
 @app.route('/get_tour_details', methods=['GET'])
@@ -297,7 +275,6 @@ def update_tour():
                     'title': new_title,
                     'description': new_description,
                     'price': new_price,
-
                 }
             }
         )
@@ -316,7 +293,8 @@ def update_tour():
                 }
             )
 
-        return jsonify({'result': 'success', 'msg': 'Tour berhasil diperbarui'})
+        # Redirect ke halaman tours.html setelah berhasil memperbarui
+        return redirect(url_for('tours'))
 
     return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
 
