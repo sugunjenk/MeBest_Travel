@@ -91,20 +91,12 @@
     <!-- Content -->
     <section class="deskripsi">
       <div class="wrapper">
-        <img src="/static/kintamani.jpg" width="100%" alt="" />
+        <img src="{{ tour_details.image_path }}" width="100%" alt="" />
         <div class="text-box">
-          <h2>Pesona Wisata Kintamani</h2>
-          <h5>Harga Tiket : Rp 1.000.000</h5>
+          <h2>{{ tour_details.title }}</h2>
+          <h5>Harga Tiket : {{ tour_details.price }}</h5>
           <p style="text-align: justify">
-            Kintamani merupakan daerah wisata Bali yang menyediakan pemandangan
-            alam pegunungan dataran tinggi dengan udara yang cukup segar.
-            Hembusan udara yang menerpa kulit melalui celah hijau hamparan
-            pepohonan yang berjejer disepanjang jalan menuju kintamani membuat
-            perjalanan terasa menyenangkan. Keindahan alam mulai terasa ketika
-            Gunung Batur yang berdiri gagah dari kejauhan menyambut sejuk dengan
-            punuh wibawa. Sambutan yang begitu damai dengan cerahnya sinar surya
-            berbalut birunya langit bertaburkan awan di sekitar Gunung
-            menjadikan perjalanan wisata ini begitu memikat.
+            {{ tour_details.description }}
           </p>
         </div>
       </div>

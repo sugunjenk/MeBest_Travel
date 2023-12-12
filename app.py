@@ -12,6 +12,7 @@ from flask import request, redirect, url_for
 from bson import ObjectId
 from flask import abort
 
+
 client = MongoClient(
     "mongodb+srv://admin:admin123@mebesttravel.75vrujy.mongodb.net/?retryWrites=true&w=majority")
 
@@ -26,7 +27,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # Ambil 4 data terbaru dari koleksi tours
+    tours_data = db.tours.find().limit(4).sort('_id', -1)
+    return render_template('index.html', tours_data=tours_data)
 
 
 @app.route('/tours')
@@ -153,10 +156,12 @@ def register():
 
 @app.route('/detail_tours')
 def detail_tours():
-    return render_template('detail.html')
+    tour_id = request.args.get('id')
+    tour_details = db.tours.find_one({'_id': ObjectId(tour_id)})
+    return render_template('detail.html', tour_details=tour_details)
 
 
-UPLOAD_FOLDER = 'static'
+UPLOAD_FOLDER = 'static/img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -290,23 +295,21 @@ def update_tour():
 @app.route('/delete_tour', methods=['POST'])
 def delete_tour():
     if request.method == 'POST':
-        tour_id = request.form['deleteTourId']
+        try:
+            tour_id = request.form['deleteTourId']
 
-        # Menggunakan ObjectId dari pymongo untuk mencocokkan _id di database
-        tour_object_id = ObjectId(tour_id)
+            # Gunakan ObjectId dari pymongo untuk mencocokkan _id di database
+            tour_object_id = ObjectId(tour_id)
 
-        # Hapus data tour dari database berdasarkan _id
-        deleted_tour = db.tours.find_one_and_delete({'_id': tour_object_id})
+            # Hapus data tur dari database berdasarkan _id
+            deleted_tour = db.tours.find_one_and_delete({'_id': tour_object_id})
 
-        if deleted_tour:
-            # Hapus juga file gambar yang terkait jika ada
-            image_path = deleted_tour.get('image_path')
-            if image_path:
-                os.remove(image_path)
-
-            return jsonify({'result': 'success', 'msg': 'Tour berhasil dihapus'})
-        else:
-            return jsonify({'result': 'failed', 'msg': 'Tour tidak ditemukan'})
+            if deleted_tour:
+                return jsonify({'result': 'success', 'msg': 'Tur berhasil dihapus'})
+            else:
+                return jsonify({'result': 'failed', 'msg': 'Tur tidak ditemukan'})
+        except Exception as e:
+            return jsonify({'result': 'failed', 'msg': str(e)})
 
     return jsonify({'result': 'failed', 'msg': 'Permintaan tidak valid'})
 

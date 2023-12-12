@@ -118,79 +118,20 @@
     <section class="destinasi" style="margin-top: 30px;">
       <h2 class="text-center mb-3 fw-bold">Pilih Destinasi Wisatamu</h2>
       <div class="content d-flex flex-wrap justify-content-center">
-        <div class="card">
-          <img src="/static/wisata.jpg" class="card-img" alt="" />
-          <div class="card-body">
-            <h1 class="card-title">Destination 1</h1>
-            <p class="card-info">
-              Pantai Kuta adalah sebuah tempat pariwisata yang terletak di
-              kecamatan Kuta sebelah selatan Kota Denpasar, Bali, Indonesia.
-              Daerah ini merupakan sebuah tujuan wisata turis mancanegara dan
-              telah menjadi objek wisata andalan Pulau Bali sejak awal tahun
-              1970-an.
-            </p>
-            <a href="/detail_tours" class="card-btn text-center"
-              >DETAIL</a
-            >
+        {% for tour in tours_data %}
+          <div class="card">
+            <img src="{{ tour.image_path }}" class="card-img" alt="" />
+            <div class="card-body">
+              <h1 class="card-title">{{ tour.title }}</h1>
+              <p class="card-info">{{ tour.description }}</p>
+              <a href="/detail_tours?id={{ tour._id }}" class="card-btn text-center">DETAIL</a>
+            </div>
           </div>
-        </div>
-
-        <div class="card">
-          <img src="/static/kintamani.jpg" class="card-img" alt="" />
-          <div class="card-body">
-            <h1 class="card-title">Destination 2</h1>
-            <p class="card-info">
-              Pantai Kuta adalah sebuah tempat pariwisata yang terletak di
-              kecamatan Kuta sebelah selatan Kota Denpasar, Bali, Indonesia.
-              Daerah ini merupakan sebuah tujuan wisata turis mancanegara dan
-              telah menjadi objek wisata andalan Pulau Bali sejak awal tahun
-              1970-an.
-            </p>
-            <a href="/detail_tours" class="card-btn text-center"
-              >DETAIL</a
-            >
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="/static/garansi.jpg" class="card-img" alt="" />
-          <div class="card-body">
-            <h1 class="card-title">Destination 3</h1>
-            <p class="card-info">
-              Pantai Kuta adalah sebuah tempat pariwisata yang terletak di
-              kecamatan Kuta sebelah selatan Kota Denpasar, Bali, Indonesia.
-              Daerah ini merupakan sebuah tujuan wisata turis mancanegara dan
-              telah menjadi objek wisata andalan Pulau Bali sejak awal tahun
-              1970-an.
-            </p>
-            <a href="/detail_tours" class="card-btn text-center"
-              >DETAIL</a
-            >
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="/static/loginregister.jpg" class="card-img" alt="" />
-          <div class="card-body">
-            <h1 class="card-title">Destination 4</h1>
-            <p class="card-info">
-              Pantai Kuta adalah sebuah tempat pariwisata yang terletak di
-              kecamatan Kuta sebelah selatan Kota Denpasar, Bali, Indonesia.
-              Daerah ini merupakan sebuah tujuan wisata turis mancanegara dan
-              telah menjadi objek wisata andalan Pulau Bali sejak awal tahun
-              1970-an.
-            </p>
-            <a href="/detail_tours" class="card-btn text-center"
-              >DETAIL</a
-            >
-          </div>
-        </div>
+        {% endfor %}
       </div>
       <div class="container text-center">
         <a href="/tours">
-          <p class="btn btn-warning my-3" style="color: white">
-            LIHAT SELENGKAPNYA
-          </p>
+          <p class="btn btn-warning my-3" style="color: white">LIHAT SELENGKAPNYA</p>
         </a>
       </div>
     </section>
