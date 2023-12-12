@@ -174,10 +174,24 @@ def register():
 
 # end autentikasi
 
+# todo: lanjut ke detail
 
-@app.route('/detail_tours')
-def detail_tours():
-    return render_template('detail.html')
+
+@app.route('/detail_tours/<id>', methods=['GET'])
+def detail_tours(id):
+    token_receive = request.cookies.get(TOKEN_KEY)
+    db_detail = db.tours.find_one({'_id': ObjectId(id)})
+    print(db_detail)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        db_user = db.users.find_one(
+            {'username': payload['id'], 'role': payload['role']})
+        return render_template('detail.html', payloads=payload, data_detail=db_detail, data_users=db_user)
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
+    except jwt.exceptions.DecodeError:
+        return render_template('detail.html', data_detail=db_detail)
 
 
 UPLOAD_FOLDER = 'static'
