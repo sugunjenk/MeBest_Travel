@@ -32,7 +32,7 @@ def index():
     tours_data = db.tours.find().limit(4).sort('_id', -1)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('index.html', tours_data=tours_data, payloads=payload)
+        return render_template('index.html', tours_data=tours_data, payloads=payload, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -48,7 +48,7 @@ def tours():
     result = request.args.get('result', '')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('tours.html', tours_data=tours_data, payloads=payload, result=result)
+        return render_template('tours.html', tours_data=tours_data, payloads=payload, token_key=TOKEN_KEY, result=result)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -61,7 +61,7 @@ def documentation():
     token_receive = request.cookies.get(TOKEN_KEY)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('documentation.html', payloads=payload)
+        return render_template('documentation.html', payloads=payload, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -77,7 +77,7 @@ def cek_pesanan():
         # 'role': result['role'],
         # 'exp': datetime.utcnow() + timedelta(seconds=60*60)
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('cekPesanan.html', payloads=payload)
+        return render_template('cekPesanan.html', payloads=payload, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -90,7 +90,7 @@ def about():
     token_receive = request.cookies.get(TOKEN_KEY)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('about.html', payloads=payload)
+        return render_template('about.html', payloads=payload, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -124,7 +124,7 @@ def login():
     })
     if (result):
         payload = {
-            'id': result['nickname'],
+            'id': result['username'],
             '_id': str(result['_id']),
             'role': result['role'],
             'exp': datetime.utcnow() + timedelta(seconds=60*60)
@@ -185,7 +185,12 @@ def detail_tours():
     tour_details = db.tours.find_one({'_id': ObjectId(tour_id)})
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('detail.html', tour_details=tour_details, payloads=payload)
+        print(payload['id'])
+        print(payload['role'])
+        db_user = db.users.find_one(
+            {'username': payload['id'], 'role': payload['role']})
+        print(db_user)
+        return render_template('detail.html', tour_details=tour_details, payloads=payload, token_key=TOKEN_KEY, db_user=db_user)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
