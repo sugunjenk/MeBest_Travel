@@ -180,7 +180,7 @@ def add_tour():
     if request.method == 'POST':
         tour_title = request.form['tourTitle']
         tour_description = request.form['tourDescription']
-        tour_price = float(request.form['tourPrice'])
+        tour_price = int(request.form['tourPrice'])
         print(tour_title, tour_description, tour_price)
 
         if 'tourImage' not in request.files:
