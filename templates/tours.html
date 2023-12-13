@@ -120,9 +120,7 @@
       if (searchInput.value !== "") {
         searchTours(searchInput.value);
         searchData.classList.remove("active");
-      } else {
-        searchData.textContent = "";
-      }
+      } 
     };
 
     cancelBtn.onclick = () => {
@@ -135,6 +133,9 @@
     };
 
     function searchTours(searchTerm) {
+      if (searchTerm.length === 0){
+        window.location.replace(`/tours`);
+      }
       // Gunakan AJAX untuk mengambil hasil pencarian dari server
       $.ajax({
         url: "/search_tours",
