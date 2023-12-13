@@ -2,244 +2,249 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MeBest Travel | Cek Pesanan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/cekPesanan.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <script>
-        // TODO hide / show berdasarkan role
-        function logout() {
-            alert('Anda telah logout')
-            $.removeCookie('{{token_key}}', { path: '/' });
-            window.location.replace('/')
-        }
-    </script>
-    <script src="/static/JS/cekPesanan.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MeBest Travel | Cek Pesanan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/cekPesanan.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <script>
+    // TODO hide / show berdasarkan role
+    function logout() {
+      alert('Anda telah logout')
+      $.removeCookie('{{token_key}}', { path: '/' });
+      window.location.replace('/')
+    }
+  </script>
+  <script src="/static/JS/cekPesanan.js"></script>
 </head>
 
 <body class="d-flex flex-column justify-content-center align-items-center">
-    <header>
-        <!-- navbar -->
-        <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
-            <div class="container-fluid">
-                <div class="wrap-brand">
-                    <a class="navbar-brand" href="#"><img src="/static/logo.png" width="100%" height="70px"
-                            alt="" /></a>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <!-- nav mid -->
-                    <ul class="navbar-nav ms-auto" id="linker">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/documentation">Documentation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/tours">Tours</a>
-                        </li>
-                        <li class="nav-item">
-                            <a id="active" class="nav-link" href="/cek_pesanan">Cek Pesanan</a>
-                        </li>
-                    </ul>
-                    <!-- nav mid -->
-
-                    <!-- nav login -->
-                    {% if payloads %}
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page"><button style="color: white; font-weight: 500"
-                                    class="Login btn btn-warning px-4 py-2" onclick='logout()'>
-                                    Logout
-                                </button></a>
-                        </li>
-                    </ul>
-                    {% else %}
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/to_login"><button
-                                    style="color: white; font-weight: 500" class="Login btn btn-warning px-4 py-2">
-                                    Login
-                                </button></a>
-                        </li>
-                    </ul>
-                    {% endif %}
-                    <!-- nav login -->
-                </div>
-            </div>
-        </nav>
-        <!-- navbar -->
-
-    </header>
-    <main class="container-fluid p-0">
-        {% for order in orders_data %}
-          <div class="container-fluid d-flex align-items-center p-3">
-              <div id="cek" class="d-flex gap-4 justify-content-stretch w-100">
-                  <div class="gambar d-block p-1">
-                      <img src="{{ order.image }}" alt="{{ order.tour }}">
-                  </div>
-                  <div class="text d-flex gap-2 flex-column align-items-stretch justify-content-stretch w-100">
-                      <h2 class="title" style="color: orange;">{{ order.tour }}</h2>
-  
-                      <table class="w-100">
-                          <tr id="namaPemesan">
-                              <td class="text-start">Nama Pemesanan</td>
-                              <td class="text-start">
-                                  <div>{{ order.nama }}</div>
-                              </td>
-                          </tr>
-                          <tr id="noPemesan">
-                              <td class="text-start">No Pemesan</td>
-                              <td class="text-start">{{ order.no_telp }}</td>
-                          </tr>
-                          <tr id="tglPemesan">
-                              <td class="text-start">Tanggal Tour</td>
-                              <td class="text-start">{{ order.tanggal_tour }}</td>
-                          </tr>
-                          <tr id="jmlTicket">
-                              <td class="text-start">Jumlah Ticket</td>
-                              <td class="text-start">{{ order.jumlah_tiket }} Ticket</td>
-                          </tr>
-                          <tr id="jenisPaket">
-                              <td class="text-start">Jenis Paket</td>
-                              <td class="text-start">
-                                {% if order.jenis_paket == 'tour_dokumentasi' %}
-                                Paket B : Tour & Documentations
-                                {% else %}
-                                Paket A : Tour
-                                {% endif %}
-                              </td>
-                          </tr>
-                          <tr id="jmlHarga">
-                              <td class="text-start">Jumlah Harga</td>
-                              <td class="text-start tour-price">{{ order.price }}</td>
-                          </tr>
-                      </table>
-                      <div class="statusWaktu d-flex justify-content-between align-items-center w-100">
-                          <div class="statusPerubahan d-flex justify-content-start align-items-center">
-                              {% if order.status == 'pending' %}
-                              <p id="hasilStatus" class="text-center text-warning p-2 border border-warning border-2 my-0 "> Pending</p>
-                              {% elif order.status == 'success' %}
-                              <p id="hasilStatus" class="text-center text-success p-2 border border-success border-2 my-0 ">Success</p>
-                              {% else %}
-                              <p id="hasilStatus" class="text-center text-danger p-2 border border-danger border-2 my-0 ">Dibatalkan</p>
-                              {% endif %}
-
-                              <select class="status form-select border border-dark w-50" id="status_admin" aria-label="Default select example" data-id="{{ order._id }}">
-                                  <option value="success" {{ 'selected' if order.status == 'success' else '' }}>Success</option>
-                                  <option value="pending" {{ 'selected' if order.status == 'pending' else '' }}>Pending</option>
-                                  <option value="dibatalkan" {{ 'selected' if order.status == 'dibatalkan' else '' }}>Dibatalkan</option>
-                              </select>
-                          </div>
-
-                          <p class="tanggalKadaluarsa text-end text-danger fw-bold my-0">{{ order.order_date }}</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <hr>
-        {% endfor %}
-    </main>
-    <!-- footer -->
-    <footer>
-        <div class="container-fluid py-5" style="background-color: orange">
-            <div class="row px-5">
-                <div class="col-lg-4 col-md-12">
-                    <img src="/static/logo.png" width="200px" alt="" />
-                    <p class="mt-3" style="text-align: justify">
-                        Dengan menggunakan Me Best Travel, pengguna dapat dengan mudah merencanakan perjalanan wisata
-                        mereka tanpa
-                        harus repot mencari informasi dari berbagai sumber yang berbeda. Semua informasi dan layanan
-                        yang dibutuhkan
-                        dapat ditemukan dalam satu platform yang terpercaya dan terupdate.
-                    </p>
-                </div>
-                <div class="col-lg-2 col-md-12 offset-lg-2 offset-md-0">
-                    <h5 style="color: white">Feature</h5>
-                    <div class="mt-5">
-                        <a style="text-decoration: none" href="">
-                            <p style="color: #252525">About</p>
-                        </a>
-                        <a style="text-decoration: none" href="">
-                            <p style="color: #252525">Documentation</p>
-                        </a>
-                        <a style="text-decoration: none" href="">
-                            <p style="color: #252525">Tours</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-12">
-                    <h5 style="color: white">Sosial Media</h5>
-                    <div class="mt-5">
-                        <a style="text-decoration: none" href="">
-                            <p style="color: #252525">Facebook : MeBest Travel</p>
-                        </a>
-                        <a style="text-decoration: none" href="">
-                            <p style="color: #252525">Instagram : MeBest_Travel</p>
-                        </a>
-                        <a style="text-decoration: none" href="">
-                            <p style="color: #252525">Kontak : 081237085281</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+  <header>
+    <!-- navbar -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid">
+        <div class="wrap-brand">
+          <a class="navbar-brand" href="#"><img src="/static/logo.png" width="100%" height="70px" alt="" /></a>
         </div>
-    </footer>
-    <!-- end footer -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <!-- nav mid -->
+          <ul class="navbar-nav ms-auto" id="linker">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/documentation">Documentation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tours">Tours</a>
+            </li>
+            <li class="nav-item">
+              <a id="active" class="nav-link" href="/cek_pesanan">Cek Pesanan</a>
+            </li>
+          </ul>
+          <!-- nav mid -->
 
-    <script>
-      function formatCurrency(amount) {
-        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
-      }
-  
-      document.addEventListener('DOMContentLoaded', function () {
-        const tourPrices = document.querySelectorAll('.tour-price');
-  
-        tourPrices.forEach(function (priceElement) {
-          const price = parseFloat(priceElement.textContent);
-          priceElement.textContent = formatCurrency(price);
-        });
+          <!-- nav login -->
+          {% if payloads %}
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page"><button style="color: white; font-weight: 500"
+                  class="Login btn btn-warning px-4 py-2" onclick='logout()'>
+                  Logout
+                </button></a>
+            </li>
+          </ul>
+          {% else %}
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/to_login"><button style="color: white; font-weight: 500"
+                  class="Login btn btn-warning px-4 py-2">
+                  Login
+                </button></a>
+            </li>
+          </ul>
+          {% endif %}
+          <!-- nav login -->
+        </div>
+      </div>
+    </nav>
+    <!-- navbar -->
+
+  </header>
+  <main class="container-fluid p-0">
+    {% if orders_data %}
+    {% for order in orders_data %}
+    <div class="container-fluid d-flex align-items-center p-3">
+      <div id="cek" class="d-flex gap-4 justify-content-stretch w-100">
+        <div class="gambar d-block p-1">
+          <img src="{{ order.image }}" alt="{{ order.tour }}">
+        </div>
+        <div class="text d-flex gap-2 flex-column align-items-stretch justify-content-stretch w-100">
+          <h2 class="title" style="color: orange;">{{ order.tour }}</h2>
+
+          <table class="w-100">
+            <tr id="namaPemesan">
+              <td class="text-start">Nama Pemesanan</td>
+              <td class="text-start">
+                <div>{{ order.nama }}</div>
+              </td>
+            </tr>
+            <tr id="noPemesan">
+              <td class="text-start">No Pemesan</td>
+              <td class="text-start">{{ order.no_telp }}</td>
+            </tr>
+            <tr id="tglPemesan">
+              <td class="text-start">Tanggal Tour</td>
+              <td class="text-start">{{ order.tanggal_tour }}</td>
+            </tr>
+            <tr id="jmlTicket">
+              <td class="text-start">Jumlah Ticket</td>
+              <td class="text-start">{{ order.jumlah_tiket }} Ticket</td>
+            </tr>
+            <tr id="jenisPaket">
+              <td class="text-start">Jenis Paket</td>
+              <td class="text-start">
+                {% if order.jenis_paket == 'tour_dokumentasi' %}
+                Paket B : Tour & Documentations
+                {% else %}
+                Paket A : Tour
+                {% endif %}
+              </td>
+            </tr>
+            <tr id="jmlHarga">
+              <td class="text-start">Jumlah Harga</td>
+              <td class="text-start tour-price">{{ order.price }}</td>
+            </tr>
+          </table>
+          <div class="statusWaktu d-flex justify-content-between align-items-center w-100">
+            <div class="statusPerubahan d-flex justify-content-start align-items-center">
+              {% if order.status == 'pending' %}
+              <p id="hasilStatus" class="text-center text-warning p-2 border border-warning border-2 my-0 "> Pending</p>
+              {% elif order.status == 'success' %}
+              <p id="hasilStatus" class="text-center text-success p-2 border border-success border-2 my-0 ">Success</p>
+              {% else %}
+              <p id="hasilStatus" class="text-center text-danger p-2 border border-danger border-2 my-0 ">Dibatalkan</p>
+              {% endif %}
+
+              {% if payloads['role'] == 1 %}
+              <select class="status form-select border border-dark w-50" id="status_admin"
+                aria-label="Default select example" data-id="{{ order._id }}">
+                <option value="success" {{ 'selected' if order.status=='success' else '' }}>Success</option>
+                <option value="pending" {{ 'selected' if order.status=='pending' else '' }}>Pending</option>
+                <option value="dibatalkan" {{ 'selected' if order.status=='dibatalkan' else '' }}>Dibatalkan</option>
+              </select>
+              {% endif %}
+            </div>
+
+            <p class="tanggalKadaluarsa text-end text-danger fw-bold my-0">{{ order.order_date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <p class="text-center m-5 alert alert-danger">Pesanan Kosong</p>
+    {% endif %}
+  </main>
+  <!-- footer -->
+  <footer>
+    <div class="container-fluid py-5" style="background-color: orange">
+      <div class="row px-5">
+        <div class="col-lg-4 col-md-12">
+          <img src="/static/logo.png" width="200px" alt="" />
+          <p class="mt-3" style="text-align: justify">
+            Dengan menggunakan Me Best Travel, pengguna dapat dengan mudah merencanakan perjalanan wisata
+            mereka tanpa
+            harus repot mencari informasi dari berbagai sumber yang berbeda. Semua informasi dan layanan
+            yang dibutuhkan
+            dapat ditemukan dalam satu platform yang terpercaya dan terupdate.
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-12 offset-lg-2 offset-md-0">
+          <h5 style="color: white">Feature</h5>
+          <div class="mt-5">
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">About</p>
+            </a>
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">Documentation</p>
+            </a>
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">Tours</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+          <h5 style="color: white">Sosial Media</h5>
+          <div class="mt-5">
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">Facebook : MeBest Travel</p>
+            </a>
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">Instagram : MeBest_Travel</p>
+            </a>
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">Kontak : 081237085281</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- end footer -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+  <script>
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const tourPrices = document.querySelectorAll('.tour-price');
+
+      tourPrices.forEach(function (priceElement) {
+        const price = parseFloat(priceElement.textContent);
+        priceElement.textContent = formatCurrency(price);
       });
+    });
 
-      $('#status_admin').on('change', function() {
-        var status = this.value;
-        var order_id = $(this).data('id');
-        $.ajax({
-          type: 'POST',
-          url: '/update_pesanan',
-          data: { 'status': status, 'order_id': order_id },
-          success: function (response) {
-            if (response.result === 'success') {
-              location.reload();
-            } else {
-              console.log(response)
-              alert('Gagal mengubah pesanan: ' + response.msg);
-            }
-          },
-          error: function (error) {
-            console.error('Error:', error);
-            alert('Terjadi kesalahan saat mengubah pesanan');
+    $('#status_admin').on('change', function () {
+      var status = this.value;
+      var order_id = $(this).data('id');
+      $.ajax({
+        type: 'POST',
+        url: '/update_pesanan',
+        data: { 'status': status, 'order_id': order_id },
+        success: function (response) {
+          if (response.result === 'success') {
+            location.reload();
+          } else {
+            console.log(response)
+            alert('Gagal mengubah pesanan: ' + response.msg);
           }
-        });
+        },
+        error: function (error) {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan saat mengubah pesanan');
+        }
       });
-    </script>
+    });
+  </script>
 
 </body>
 

@@ -76,8 +76,8 @@ def documentation():
 
 @app.route('/cek_pesanan')
 def cek_pesanan():
-    token_receive = request.cookies.get(TOKEN_KEY)
     try:
+        token_receive = request.cookies.get(TOKEN_KEY)
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         if payload['role'] == 1:
             orders = db.orders.find().sort('order_date', 1)
@@ -89,11 +89,17 @@ def cek_pesanan():
                 order['image'] = tour_data['image_path']
                 order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
                 orders_data.append(order)
-                print(tour_data)
-            print(orders_data)
             pass
         elif payload['role'] == 2:
-            print(payload)
+            orders = db.orders.find({'user_id': ObjectId(payload['_id'])}).sort('order_date', 1)
+            orders_data = []
+            for order in orders:
+                tour_data = db.tours.find_one({'_id': order['tour_id']})
+                order['tour'] = tour_data['title']
+                order['price'] = tour_data['price']
+                order['image'] = tour_data['image_path']
+                order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
+                orders_data.append(order)
 
         return render_template('cekPesanan.html', payloads=payload, orders_data=orders_data, token_key=TOKEN_KEY)
 
