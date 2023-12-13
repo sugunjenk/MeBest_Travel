@@ -138,7 +138,7 @@
                               <p id="hasilStatus" class="text-center text-danger p-2 border border-danger border-2 my-0 ">Dibatalkan</p>
                               {% endif %}
 
-                              <select class="status form-select border border-dark w-50" id="status_admin" aria-label="Default select example">
+                              <select class="status form-select border border-dark w-50" id="status_admin" aria-label="Default select example" data-id="{{ order._id }}">
                                   <option value="success" {{ 'selected' if order.status == 'success' else '' }}>Success</option>
                                   <option value="pending" {{ 'selected' if order.status == 'pending' else '' }}>Pending</option>
                                   <option value="dibatalkan" {{ 'selected' if order.status == 'dibatalkan' else '' }}>Dibatalkan</option>
@@ -220,25 +220,24 @@
 
       $('#status_admin').on('change', function() {
         var status = this.value;
-        location.reload();
-        // $.ajax({
-        //   type: 'POST',
-        //   url: '/delete_tour',
-        //   data: { 'deleteTourId': tourId },
-        //   success: function (response) {
-        //     if (response.result === 'success') {
-        //       // Muat ulang halaman setelah menghapus tur
-        //       location.reload();
-        //     } else {
-        //       console.log(response)
-        //       alert('Gagal menghapus tur: ' + response.msg);
-        //     }
-        //   },
-        //   error: function (error) {
-        //     console.error('Error:', error);
-        //     alert('Terjadi kesalahan saat menghapus tur');
-        //   }
-        // });
+        var order_id = $(this).data('id');
+        $.ajax({
+          type: 'POST',
+          url: '/update_pesanan',
+          data: { 'status': status, 'order_id': order_id },
+          success: function (response) {
+            if (response.result === 'success') {
+              location.reload();
+            } else {
+              console.log(response)
+              alert('Gagal mengubah pesanan: ' + response.msg);
+            }
+          },
+          error: function (error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat mengubah pesanan');
+          }
+        });
       });
     </script>
 

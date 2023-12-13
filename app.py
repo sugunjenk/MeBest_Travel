@@ -80,7 +80,7 @@ def cek_pesanan():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         if payload['role'] == 1:
-            orders = db.orders.find()
+            orders = db.orders.find().sort('order_date', 1)
             orders_data = []
             for order in orders:
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
@@ -102,6 +102,21 @@ def cek_pesanan():
     except jwt.exceptions.DecodeError:
         return redirect(url_for('to_login', msg="Anda Belum Login"))
 
+@app.route('/update_pesanan', methods=['POST'])
+def update_pesanan():
+    try:
+        status = request.form['status']
+        order_id = request.form['order_id']
+        order_object_id = ObjectId(order_id)
+
+        updated_order = db.orders.find_one_and_update({'_id': order_object_id}, {'$set': {'status': status}})
+
+        if updated_order:
+            return jsonify({'result': 'success', 'msg': 'Pesanan berhasil dihapus'})
+        else:
+            return jsonify({'result': 'failed', 'msg': 'Pesanan tidak ditemukan'})
+    except Exception as e:
+        return jsonify({'result': 'failed', 'msg': str(e)})
 
 @app.route('/about')
 def about():
@@ -372,7 +387,6 @@ def booking_tour():
     })
 
     return redirect('cek_pesanan')
-
 
 @app.route('/search_tours', methods=['POST'])
 def search_tours():
