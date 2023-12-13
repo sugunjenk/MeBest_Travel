@@ -116,12 +116,13 @@
                 "Explore. Dream. Discover. Your Gateway to Limitless Adventures
                 with <span style="color: orange">MeBest Travel</span>."
               </h1>
-              <button
+              <a
                 class="btn btn-warning mt-3"
+                href="#destinasi"
                 style="color: white; font-weight: 500"
               >
                 Explore Now
-              </button>
+            </a>
             </div>
           </div>
         </div>
@@ -131,7 +132,7 @@
 
 
     <!-- New Content -->
-    <section class="destinasi" style="margin-top: 30px;">
+    <section class="destinasi" id="destinasi" style="margin-top: 30px;">
       <h2 class="text-center mb-3 fw-bold">Pilih Destinasi Wisatamu</h2>
       <div class="content d-flex flex-wrap justify-content-center">
         {% for tour in tours_data %}
