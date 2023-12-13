@@ -110,56 +110,52 @@
     const cancelBtn = document.querySelector(".cancel-icon");
     const searchInput = document.querySelector("#searchInput");
     const searchData = document.querySelector(".search-data");
+    const noResultsMessage = document.getElementById("noResultsMessage");
 
-    // Tambahkan variabel untuk menyimpan status pencarian
     let isSearching = false;
 
     searchBtn.onclick = () => {
-      // Tambahkan kondisi untuk memeriksa apakah sudah dalam mode pencarian
       if (!isSearching) {
-        // Jika belum dalam mode pencarian, aktifkan dan bersihkan input
         isSearching = true;
         searchBox.classList.add("active");
         searchBtn.classList.add("active");
         searchInput.classList.add("active");
         cancelBtn.classList.add("active");
         searchInput.focus();
-        searchInput.value = "";  // Membersihkan input
+        searchInput.value = "";
       } else {
-        // Jika sudah dalam mode pencarian, lakukan pencarian
         if (searchInput.value !== "") {
           searchTours(searchInput.value);
-          searchData.classList.remove("active");
+        } else {
+          window.location.replace(`/tours`);
         }
       }
     };
 
     cancelBtn.onclick = () => {
-      
-      if (isSearching) {
-        
-        isSearching = false;
-        searchBox.classList.remove("active");
-        searchBtn.classList.remove("active");
-        searchInput.classList.remove("active");
-        cancelBtn.classList.remove("active");
-        searchData.classList.toggle("active");
-        searchInput.value = "";
-      }
+      isSearching = false;
+      searchBox.classList.remove("active");
+      searchBtn.classList.remove("active");
+      searchInput.classList.remove("active");
+      cancelBtn.classList.remove("active");
+      searchData.classList.toggle("active");
+      searchInput.value = "";
     };
 
     function searchTours(searchTerm) {
-      if (searchTerm.length === 0){
-        window.location.replace(`/tours`);
-      }
-      /
       $.ajax({
         url: "/search_tours",
         type: "POST",
         data: { searchTerm: searchTerm },
         success: function (data) {
           if (data.result === 'success') {
-            window.location.replace(`/tours?filtered_tours=${data.filtered_tours}`);
+            if (data.filtered_tours.length > 0) {
+              window.location.replace(`/tours?filtered_tours=${data.filtered_tours}`);
+            } else {
+              // Tampilkan pesan di dalam paragraph jika tidak ada hasil pencarian
+              noResultsMessage.textContent = "Tidak ada data yang sesuai dengan pencarian Anda";
+              noResultsMessage.style.display = "block";
+            }
           }
         },
         error: function (error) {
@@ -167,21 +163,6 @@
         },
       });
     }
-
-    //function tampilkanHasilPencarian(hasilPencarian) {
-    //  if (hasilPencarian.length > 0) {
-    //    searchData.innerHTML = "";
-    //    hasilPencarian.forEach((hasil) => {
-    //      const itemHasil = document.createElement("div");
-    //      itemHasil.textContent = hasil.title;
-    //      searchData.appendChild(itemHasil);
-    //    });
-    //    searchData.classList.add("active");
-    //  } else {
-    //    searchData.textContent = "Tidak ditemukan hasil";
-    //    searchData.classList.add("active");
-    //  }
-    //}
   </script>
 
   <section>
