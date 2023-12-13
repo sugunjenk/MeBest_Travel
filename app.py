@@ -9,7 +9,7 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask import request, redirect, url_for
-from bson import ObjectId
+from bson import ObjectId, json_util
 from flask import abort
 
 
@@ -42,17 +42,22 @@ def index():
 
 @app.route('/tours')
 def tours():
+    tours_search = request.args.get('filtered_tours')
     tours_data = []  # You need to populate this with actual data from your database
     token_receive = request.cookies.get(TOKEN_KEY)
     tours_data = db.tours.find()
     result = request.args.get('result', '')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        if tours_search:
+            return render_template('tours.html', tours_data=json_util.loads(tours_search), result=result, payloads=payload, token_key=TOKEN_KEY,)
         return render_template('tours.html', tours_data=tours_data, payloads=payload, token_key=TOKEN_KEY, result=result)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
     except jwt.exceptions.DecodeError:
+        if tours_search:
+            return render_template('tours.html', tours_data=json_util.loads(tours_search), result=result)
         return render_template('tours.html', tours_data=tours_data, result=result)
 
 
@@ -353,12 +358,16 @@ def booking_tour():
 
     return redirect('cek_pesanan')
 
+
 @app.route('/search_tours', methods=['POST'])
 def search_tours():
     search_term = request.form.get('searchTerm', '').lower()
     tours_data = db.tours.find()
-    filtered_tours = [tour for tour in tours_data if search_term in tour['title'].lower() or search_term in tour['description'].lower()]
-    return jsonify(filtered_tours)
+    filtered_tours = json_util.dumps([tour for tour in tours_data if search_term in tour['title'].lower(
+    ) or search_term in tour['description'].lower()])
+    print(filtered_tours)
+    return jsonify({'filtered_tours': filtered_tours, 'result': 'success'})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
