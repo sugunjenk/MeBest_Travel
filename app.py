@@ -353,7 +353,9 @@ def booking_tour():
         'jenis_paket': jenis_paket,
         'tanggal_tour': tanggal_tour,
         'tour_id': tour,
-        'user_id': user_id
+        'user_id': user_id,
+        'status': 'Pending',
+        'order_date': datetime.now()
     })
 
     return redirect('cek_pesanan')
