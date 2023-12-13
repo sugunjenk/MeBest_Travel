@@ -27,9 +27,18 @@
     <!-- navbar -->
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
+        {% if payloads %}
+        <div class="wrap-brand d-flex align-items-center">
+          <a class="navbar-brand" href="#"><img src="/static/logo.png" width="100%" height="70px" alt="" /></a>
+          <a class="navbar-brand">
+            <h2 class="nav-link">{{payloads.nickname}}</h2>
+          </a>
+        </div>
+        {% else %}
         <div class="wrap-brand">
           <a class="navbar-brand" href="#"><img src="/static/logo.png" width="100%" height="70px" alt="" /></a>
         </div>
+        {% endif %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

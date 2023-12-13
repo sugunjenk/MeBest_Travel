@@ -2,6 +2,20 @@ body {
   background-color: #f4f4f4;
 }
 
+.wrap-brand .nav-link {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.wrap-brand .navbar-brand:last-child {
+  margin: 0;
+  padding: 0;
+  padding-block: 1rem;
+  height: 80px;
+  align-items: center;
+}
+
 section {
   padding: 2rem 9%;
 }

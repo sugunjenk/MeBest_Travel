@@ -32,7 +32,9 @@ def index():
     tours_data = db.tours.find().limit(4).sort('_id', -1)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('index.html', tours_data=tours_data, payloads=payload, token_key=TOKEN_KEY)
+        data_user = db.users.find_one(
+            {'username': payload['id'], 'role': payload['role']})
+        return render_template('index.html', tours_data=tours_data, payloads=data_user, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -49,9 +51,11 @@ def tours():
     result = request.args.get('result', '')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        data_user = db.users.find_one(
+            {'username': payload['id'], 'role': payload['role']})
         if tours_search:
-            return render_template('tours.html', tours_data=json_util.loads(tours_search), result=result, payloads=payload, token_key=TOKEN_KEY,)
-        return render_template('tours.html', tours_data=tours_data, payloads=payload, token_key=TOKEN_KEY, result=result)
+            return render_template('tours.html', tours_data=json_util.loads(tours_search), result=result, payloads=data_user, token_key=TOKEN_KEY,)
+        return render_template('tours.html', tours_data=tours_data, payloads=data_user, token_key=TOKEN_KEY, result=result)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -66,7 +70,9 @@ def documentation():
     token_receive = request.cookies.get(TOKEN_KEY)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('documentation.html', payloads=payload, token_key=TOKEN_KEY)
+        data_user = db.users.find_one(
+            {'username': payload['id'], 'role': payload['role']})
+        return render_template('documentation.html', payloads=data_user, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -79,6 +85,8 @@ def cek_pesanan():
     try:
         token_receive = request.cookies.get(TOKEN_KEY)
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        data_user = db.users.find_one(
+            {'username': payload['id'], 'role': payload['role']})
         if payload['role'] == 1:
             orders = db.orders.find().sort('order_date', DESCENDING)
             orders_data = []
@@ -86,25 +94,29 @@ def cek_pesanan():
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
                 order['tour'] = tour_data['title']
                 order['image'] = tour_data['image_path']
-                order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
+                order['order_date'] = order['order_date'].strftime(
+                    "%Y-%m-%d %H:%M:%S")
                 orders_data.append(order)
             pass
         elif payload['role'] == 2:
-            orders = db.orders.find({'user_id': ObjectId(payload['_id'])}).sort('order_date', DESCENDING)
+            orders = db.orders.find({'user_id': ObjectId(payload['_id'])}).sort(
+                'order_date', DESCENDING)
             orders_data = []
             for order in orders:
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
                 order['tour'] = tour_data['title']
                 order['image'] = tour_data['image_path']
-                order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
+                order['order_date'] = order['order_date'].strftime(
+                    "%Y-%m-%d %H:%M:%S")
                 orders_data.append(order)
 
-        return render_template('cekPesanan.html', payloads=payload, orders_data=orders_data, token_key=TOKEN_KEY)
+        return render_template('cekPesanan.html', payloads=data_user, orders_data=orders_data, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for('to_login', msg="Anda Belum Login"))
+
 
 @app.route('/update_pesanan', methods=['POST'])
 def update_pesanan():
@@ -113,7 +125,8 @@ def update_pesanan():
         order_id = request.form['order_id']
         order_object_id = ObjectId(order_id)
 
-        updated_order = db.orders.find_one_and_update({'_id': order_object_id}, {'$set': {'status': status}})
+        updated_order = db.orders.find_one_and_update(
+            {'_id': order_object_id}, {'$set': {'status': status}})
 
         if updated_order:
             return jsonify({'result': 'success', 'msg': 'Pesanan berhasil dihapus'})
@@ -122,12 +135,15 @@ def update_pesanan():
     except Exception as e:
         return jsonify({'result': 'failed', 'msg': str(e)})
 
+
 @app.route('/about')
 def about():
     token_receive = request.cookies.get(TOKEN_KEY)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        return render_template('about.html', payloads=payload, token_key=TOKEN_KEY)
+        data_user = db.users.find_one(
+            {'username': payload['id'], 'role': payload['role']})
+        return render_template('about.html', payloads=data_user, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -227,7 +243,7 @@ def detail_tours():
         db_user = db.users.find_one(
             {'username': payload['id'], 'role': payload['role']})
         print(db_user)
-        return render_template('detail.html', tour_details=tour_details, payloads=payload, token_key=TOKEN_KEY, db_user=db_user)
+        return render_template('detail.html', tour_details=tour_details, payloads=db_user, token_key=TOKEN_KEY, db_user=db_user)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -393,6 +409,7 @@ def booking_tour():
     })
 
     return redirect('cek_pesanan')
+
 
 @app.route('/search_tours', methods=['POST'])
 def search_tours():

@@ -1,381 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MeBest Travel | Home</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bitter&family=Noto+Serif+Display:wght@500;700&family=Poppins:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/static/header_footer.css" />
-    <link rel="stylesheet" href="/static/index.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
-  </head>
 
-  <body>
-    <!-- navbar -->
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
-      <div class="container-fluid">
-        <div class="wrap-brand">
-          <a class="navbar-brand" href="#"
-            ><img src="/static/logo.png" width="100%" height="70px" alt=""
-          /></a>
-        </div>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <!-- nav mid -->
-          <ul class="navbar-nav ms-auto" id="linker">
-            <li class="nav-item">
-              <a id="active" class="nav-link" aria-current="page" href="/"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/documentation">Documentation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/tours">Tours</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/cek_pesanan">Cek Pesanan</a>
-            </li>
-          </ul>
-          <!-- nav mid -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MeBest Travel | Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bitter&family=Noto+Serif+Display:wght@500;700&family=Poppins:wght@300&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/static/header_footer.css" />
+  <link rel="stylesheet" href="/static/index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
 
-           <!-- nav login -->
+<body>
+  <!-- navbar -->
+  <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      {% if payloads %}
+      <div class="wrap-brand d-flex align-items-center">
+        <a class="navbar-brand" href="#"><img src="/static/logo.png" width="100%" height="70px" alt="" /></a>
+        <a class="navbar-brand">
+          <h2 class="nav-link">{{payloads.nickname}}</h2>
+        </a>
+      </div>
+      {% else %}
+      <div class="wrap-brand">
+        <a class="navbar-brand" href="#"><img src="/static/logo.png" width="100%" height="70px" alt="" /></a>
+      </div>
+      {% endif %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <!-- nav mid -->
+        <ul class="navbar-nav ms-auto" id="linker">
+          <li class="nav-item">
+            <a id="active" class="nav-link" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/documentation">Documentation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tours">Tours</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cek_pesanan">Cek Pesanan</a>
+          </li>
+        </ul>
+        <!-- nav mid -->
+
+        <!-- nav login -->
         {% if payloads %}
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page"
-              ><button
-                style="color: white; font-weight: 500"
-                class="Login btn btn-warning px-4 py-2"
-                onclick='logout()'
-              >
+            <a class="nav-link" aria-current="page"><button style="color: white; font-weight: 500"
+                class="Login btn btn-warning px-4 py-2" onclick='logout()'>
                 Logout
-              </button></a
-            >
+              </button></a>
           </li>
         </ul>
         {% else %}
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/to_login"
-              ><button
-                style="color: white; font-weight: 500"
-                class="Login btn btn-warning px-4 py-2"
-              >
+            <a class="nav-link" aria-current="page" href="/to_login"><button style="color: white; font-weight: 500"
+                class="Login btn btn-warning px-4 py-2">
                 Login
-              </button></a
-            >
+              </button></a>
           </li>
         </ul>
         {% endif %}
         <!-- nav login -->
-        </div>
       </div>
-    </nav>
-    <!-- navbar -->
+    </div>
+  </nav>
+  <!-- navbar -->
 
-    <!-- Hero -->
-    <div id="Hero">
-      <div class="fcontainer">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h1 style="color: white; font-weight: 800">
-                "Explore. Dream. Discover. Your Gateway to Limitless Adventures
-                with <span style="color: orange">MeBest Travel</span>."
-              </h1>
-              <a
-                class="btn btn-warning mt-3"
-                href="#destinasi"
-                style="color: white; font-weight: 500"
-              >
-                Explore Now
+  <!-- Hero -->
+  <div id="Hero">
+    <div class="fcontainer">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1 style="color: white; font-weight: 800">
+              "Explore. Dream. Discover. Your Gateway to Limitless Adventures
+              with <span style="color: orange">MeBest Travel</span>."
+            </h1>
+            <a class="btn btn-warning mt-3" href="#destinasi" style="color: white; font-weight: 500">
+              Explore Now
             </a>
-            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Hero -->
+  </div>
+  <!-- Hero -->
 
 
-    <!-- New Content -->
-    <section class="destinasi" id="destinasi" style="margin-top: 30px;">
-      <h2 class="text-center mb-3 fw-bold">Pilih Destinasi Wisatamu</h2>
-      <div class="content d-flex flex-wrap justify-content-center">
-        {% for tour in tours_data %}
-          <div class="card">
-            <img src="{{ tour.image_path }}" class="card-img" alt="" />
-            <div class="card-body">
-              <h1 class="card-title">{{ tour.title }}</h1>
-              <p class="card-info">{{ tour.description }}</p>
-              <a href="/detail_tours?id={{ tour._id }}" class="card-btn text-center">DETAIL</a>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-      <div class="container text-center">
-        <a href="/tours">
-          <p class="btn btn-warning my-3" style="color: white">LIHAT SELENGKAPNYA</p>
-        </a>
-      </div>
-    </section>
-
-    <!-- Section Deskripsi -->
-    <section class="deskripsi">
-      <div class="wrapper">
-        <img src="/static/trav.png" alt="" />
-        <div class="text-box">
-          <h2>Jelajahi Kekayaan Alam Indonesia Bersama MeBest Travel</h2>
-          <p style="text-align: justify">
-            Selamat datang di destinasi perjalanan impian Anda! Di sini, kami
-            menyediakan pengalaman perjalanan yang tak terlupakan dengan cara
-            yang mudah dan nyaman. Selamatkan momen-momen berharga Anda dengan
-            mudahnya melakukan pemesanan tour wisata melalui MeBest Travel.
-            Lupakan kerumitan perencanaan perjalanan. Kami telah menyederhanakan
-            proses pemesanan untuk memberi Anda pengalaman yang lancar. Cukup
-            masukkan tanggal perjalanan, pilih paket tour yang Anda inginkan,
-            dan selesaikan pemesanan dengan mudah.
-          </p>
-          <p style="text-align: justify">
-            Mulailah petualangan Anda sekarang! Booking mudah, pengalaman tak
-            terlupakan. Selamat datang di dunia perjalanan yang praktis, di
-            ujung jari Anda.
-          </p>
+  <!-- New Content -->
+  <section class="destinasi" id="destinasi" style="margin-top: 30px;">
+    <h2 class="text-center mb-3 fw-bold">Pilih Destinasi Wisatamu</h2>
+    <div class="content d-flex flex-wrap justify-content-center">
+      {% for tour in tours_data %}
+      <div class="card">
+        <img src="{{ tour.image_path }}" class="card-img" alt="" />
+        <div class="card-body">
+          <h1 class="card-title">{{ tour.title }}</h1>
+          <p class="card-info">{{ tour.description }}</p>
+          <a href="/detail_tours?id={{ tour._id }}" class="card-btn text-center">DETAIL</a>
         </div>
       </div>
-    </section>
+      {% endfor %}
+    </div>
+    <div class="container text-center">
+      <a href="/tours">
+        <p class="btn btn-warning my-3" style="color: white">LIHAT SELENGKAPNYA</p>
+      </a>
+    </div>
+  </section>
 
-    <!-- Section Testimoni -->
-    <section class="testimonials">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="title">What Our Clients Say</h2>
-        </div>
-        <div class="testimonials-content">
-          <div class="swiper testimonials-slider js-testimonials-slider">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide testimonials-item">
-                <div class="info">
-                  <img src="/static/selvi.png" alt="img1" />
-                  <div class="text-box">
-                    <h3 class="name">Customer 1</h3>
-                  </div>
-                </div>
-                <p>
-                  Saya sangat senang dengan pengalaman saya bersama MeBest
-                  Travel. Segala sesuatu diatur dengan sangat profesional dan
-                  lancar. Saya pasti akan bepergian dengan mereka lagi di masa
-                  depan.
-                </p>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
+  <!-- Section Deskripsi -->
+  <section class="deskripsi">
+    <div class="wrapper">
+      <img src="/static/trav.png" alt="" />
+      <div class="text-box">
+        <h2>Jelajahi Kekayaan Alam Indonesia Bersama MeBest Travel</h2>
+        <p style="text-align: justify">
+          Selamat datang di destinasi perjalanan impian Anda! Di sini, kami
+          menyediakan pengalaman perjalanan yang tak terlupakan dengan cara
+          yang mudah dan nyaman. Selamatkan momen-momen berharga Anda dengan
+          mudahnya melakukan pemesanan tour wisata melalui MeBest Travel.
+          Lupakan kerumitan perencanaan perjalanan. Kami telah menyederhanakan
+          proses pemesanan untuk memberi Anda pengalaman yang lancar. Cukup
+          masukkan tanggal perjalanan, pilih paket tour yang Anda inginkan,
+          dan selesaikan pemesanan dengan mudah.
+        </p>
+        <p style="text-align: justify">
+          Mulailah petualangan Anda sekarang! Booking mudah, pengalaman tak
+          terlupakan. Selamat datang di dunia perjalanan yang praktis, di
+          ujung jari Anda.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Testimoni -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="title">What Our Clients Say</h2>
+      </div>
+      <div class="testimonials-content">
+        <div class="swiper testimonials-slider js-testimonials-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide testimonials-item">
+              <div class="info">
+                <img src="/static/selvi.png" alt="img1" />
+                <div class="text-box">
+                  <h3 class="name">Customer 1</h3>
                 </div>
               </div>
-
-              <div class="swiper-slide testimonials-item">
-                <div class="info">
-                  <img src="/static/salahudin.png" alt="img2" />
-                  <div class="text-box">
-                    <h3 class="name">Customer 2</h3>
-                  </div>
-                </div>
-                <p>
-                  Bersama MeBest Travel menjadikan liburan keluarga terbaik yang
-                  pernah saya miliki. Saya pasti akan merekomendasikan MeBest
-                  Travel jika Anda mencari liburan berkualitas dengan anggaran
-                  terbatas.
-                </p>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-
-              <div class="swiper-slide testimonials-item">
-                <div class="info">
-                  <img src="/static/sogun.PNG" alt="img3" />
-                  <div class="text-box">
-                    <h3 class="name">Customer 3</h3>
-                  </div>
-                </div>
-                <p>
-                  Paket wisata hemat yang saya pesan melalui MeBest Travel untuk
-                  perjalanan saya sangat berharga! Saya bisa menikmati destinasi
-                  impian saya tanpa harus membayar lebih.
-                </p>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-
-              <div class="swiper-slide testimonials-item">
-                <div class="info">
-                  <img src="/static/dimas.png" alt="img4" />
-                  <div class="text-box">
-                    <h3 class="name">Customer 4</h3>
-                  </div>
-                </div>
-                <p>
-                  Perjalanan wisata saya ke Bali yang diatur oleh MeBest Travel
-                  melampaui harapan saya. Pemandu wisata sangat berpengalaman
-                  dan mampu menjawab semua pertanyaan kami.
-                </p>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
+              <p>
+                Saya sangat senang dengan pengalaman saya bersama MeBest
+                Travel. Segala sesuatu diatur dengan sangat profesional dan
+                lancar. Saya pasti akan bepergian dengan mereka lagi di masa
+                depan.
+              </p>
+              <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
               </div>
             </div>
+
+            <div class="swiper-slide testimonials-item">
+              <div class="info">
+                <img src="/static/salahudin.png" alt="img2" />
+                <div class="text-box">
+                  <h3 class="name">Customer 2</h3>
+                </div>
+              </div>
+              <p>
+                Bersama MeBest Travel menjadikan liburan keluarga terbaik yang
+                pernah saya miliki. Saya pasti akan merekomendasikan MeBest
+                Travel jika Anda mencari liburan berkualitas dengan anggaran
+                terbatas.
+              </p>
+              <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+
+            <div class="swiper-slide testimonials-item">
+              <div class="info">
+                <img src="/static/sogun.PNG" alt="img3" />
+                <div class="text-box">
+                  <h3 class="name">Customer 3</h3>
+                </div>
+              </div>
+              <p>
+                Paket wisata hemat yang saya pesan melalui MeBest Travel untuk
+                perjalanan saya sangat berharga! Saya bisa menikmati destinasi
+                impian saya tanpa harus membayar lebih.
+              </p>
+              <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+
+            <div class="swiper-slide testimonials-item">
+              <div class="info">
+                <img src="/static/dimas.png" alt="img4" />
+                <div class="text-box">
+                  <h3 class="name">Customer 4</h3>
+                </div>
+              </div>
+              <p>
+                Perjalanan wisata saya ke Bali yang diatur oleh MeBest Travel
+                melampaui harapan saya. Pemandu wisata sangat berpengalaman
+                dan mampu menjawab semua pertanyaan kami.
+              </p>
+              <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
           </div>
-          <div class="swiper-pagination js-testimonials-pagination"></div>
         </div>
+        <div class="swiper-pagination js-testimonials-pagination"></div>
       </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-      const swiper = new Swiper(".js-testimonials-slider", {
-        grabCursor: true,
-        spaceBetween: 30,
-        pagination: {
-          el: ".js-testimonials-pagination",
-          clickable: true,
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper(".js-testimonials-slider", {
+      grabCursor: true,
+      spaceBetween: 30,
+      pagination: {
+        el: ".js-testimonials-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        767: {
+          slidesPerView: 2,
         },
-        breakpoints: {
-          767: {
-            slidesPerView: 2,
-          },
-        },
-      });
-    </script>
+      },
+    });
+  </script>
 
-    <!-- footer -->
-    <footer>
-      <div class="container-fluid py-5" style="background-color: orange">
-        <div class="row px-5">
-          <div class="col-lg-4 col-md-12">
-            <img src="/static/logo.png" width="200px" alt="" />
-            <p class="mt-3" style="text-align: justify">
-              Dengan menggunakan Me Best Travel, pengguna dapat dengan mudah
-              merencanakan perjalanan wisata mereka tanpa harus repot mencari
-              informasi dari berbagai sumber yang berbeda. Semua informasi dan
-              layanan yang dibutuhkan dapat ditemukan dalam satu platform yang
-              terpercaya dan terupdate.
-            </p>
+  <!-- footer -->
+  <footer>
+    <div class="container-fluid py-5" style="background-color: orange">
+      <div class="row px-5">
+        <div class="col-lg-4 col-md-12">
+          <img src="/static/logo.png" width="200px" alt="" />
+          <p class="mt-3" style="text-align: justify">
+            Dengan menggunakan Me Best Travel, pengguna dapat dengan mudah
+            merencanakan perjalanan wisata mereka tanpa harus repot mencari
+            informasi dari berbagai sumber yang berbeda. Semua informasi dan
+            layanan yang dibutuhkan dapat ditemukan dalam satu platform yang
+            terpercaya dan terupdate.
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-12 offset-lg-2 offset-md-0">
+          <h5 style="color: white">Feature</h5>
+          <div class="mt-5">
+            <a style="text-decoration: none" href="/about">
+              <p style="color: #252525">About</p>
+            </a>
+            <a style="text-decoration: none" href="/documentation">
+              <p style="color: #252525">Documentation</p>
+            </a>
+            <a style="text-decoration: none" href="/tours">
+              <p style="color: #252525">Tours</p>
+            </a>
           </div>
-          <div class="col-lg-2 col-md-12 offset-lg-2 offset-md-0">
-            <h5 style="color: white">Feature</h5>
-            <div class="mt-5">
-              <a style="text-decoration: none" href="/about">
-                <p style="color: #252525">About</p>
-              </a>
-              <a style="text-decoration: none" href="/documentation">
-                <p style="color: #252525">Documentation</p>
-              </a>
-              <a style="text-decoration: none" href="/tours">
-                <p style="color: #252525">Tours</p>
-              </a>
-            </div>
-          </div>
+        </div>
 
-          <div class="col-lg-4 col-md-12">
-            <h5 style="color: white">Sosial Media</h5>
-            <div class="mt-5">
-              <a style="text-decoration: none" href="">
-                <p style="color: #252525">Facebook : MeBest Travel</p>
-              </a>
-              <a style="text-decoration: none" href="">
-                <p style="color: #252525">Instagram : MeBest_Travel</p>
-              </a>
-              <a style="text-decoration: none" href="">
-                <p style="color: #252525">Kontak : 081237085281</p>
-              </a>
-            </div>
+        <div class="col-lg-4 col-md-12">
+          <h5 style="color: white">Sosial Media</h5>
+          <div class="mt-5">
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">Facebook : MeBest Travel</p>
+            </a>
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">Instagram : MeBest_Travel</p>
+            </a>
+            <a style="text-decoration: none" href="">
+              <p style="color: #252525">Kontak : 081237085281</p>
+            </a>
           </div>
         </div>
       </div>
-    </footer>
-    <!-- end footer -->
+    </div>
+  </footer>
+  <!-- end footer -->
 
-    <script>
-      window.onscroll = function () {
-        scrollFunction();
-      };
+  <script>
+    window.onscroll = function () {
+      scrollFunction();
+    };
 
-      function scrollFunction() {
-        if (
-          document.body.scrollTop > 80 ||
-          document.documentElement.scrollTop > 80
-        ) {
-          document.getElementById("navbar").style.backgroundColor = "orange";
-          document.getElementById("active").style.color = "#ffffff";
-          document.getElementById("active").style.borderBottom =
-            "2px solid #ffffff";
-        } else {
-          document.getElementById("navbar").style.backgroundColor =
-            "transparent";
-          document.getElementById("navbar").style.transition = "0.3s";
-          document.getElementById("active").style.color = "#ffa500";
-          document.getElementById("active").style.borderBottom =
-            "2px solid #ffa500";
-        }
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
+        document.getElementById("navbar").style.backgroundColor = "orange";
+        document.getElementById("active").style.color = "#ffffff";
+        document.getElementById("active").style.borderBottom =
+          "2px solid #ffffff";
+      } else {
+        document.getElementById("navbar").style.backgroundColor =
+          "transparent";
+        document.getElementById("navbar").style.transition = "0.3s";
+        document.getElementById("active").style.color = "#ffa500";
+        document.getElementById("active").style.borderBottom =
+          "2px solid #ffa500";
       }
+    }
 
-      function logout() {
-        alert('Anda telah logout')
-        $.removeCookie('{{token_key}}', { path: '/' });
-        window.location.replace('/')
-      }
-    </script>
+    function logout() {
+      alert('Anda telah logout')
+      $.removeCookie('{{token_key}}', { path: '/' });
+      window.location.replace('/')
+    }
+  </script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

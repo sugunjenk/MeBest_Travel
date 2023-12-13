@@ -12,6 +12,20 @@ body {
     margin-top: 50px;
 }
 
+.wrap-brand .nav-link {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.wrap-brand .navbar-brand:last-child {
+    margin: 0;
+    padding: 0;
+    padding-block: 1rem;
+    height: 80px;
+    align-items: center;
+}
+
 .navbar {
     background-color: rgb(255, 166, 0);
 }

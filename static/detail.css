@@ -4,6 +4,20 @@
   align-items: center;
 }
 
+.wrap-brand .nav-link {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.wrap-brand .navbar-brand:last-child {
+  margin: 0;
+  padding: 0;
+  padding-block: 1rem;
+  height: 80px;
+  align-items: center;
+}
+
 .deskripsi .wrapper {
   margin: 100px auto;
   width: 80%;
@@ -33,10 +47,12 @@ form {
   max-width: 500px;
   margin: auto;
 }
+
 label {
   display: block;
   margin-bottom: 5px;
 }
+
 input,
 select {
   width: 100%;
@@ -46,6 +62,7 @@ select {
   border-radius: 10px;
   border: 2px solid #949baa;
 }
+
 button {
   background-color: #1051ca;
   color: white;
