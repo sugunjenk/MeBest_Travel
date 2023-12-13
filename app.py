@@ -2,7 +2,7 @@ import os
 from os import environ
 from os.path import join, dirname
 from dotenv import load_dotenv
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING
 import jwt
 from datetime import datetime, timedelta
 import hashlib
@@ -80,7 +80,7 @@ def cek_pesanan():
         token_receive = request.cookies.get(TOKEN_KEY)
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         if payload['role'] == 1:
-            orders = db.orders.find().sort('order_date', 1)
+            orders = db.orders.find().sort('order_date', DESCENDING)
             orders_data = []
             for order in orders:
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
@@ -91,7 +91,7 @@ def cek_pesanan():
                 orders_data.append(order)
             pass
         elif payload['role'] == 2:
-            orders = db.orders.find({'user_id': ObjectId(payload['_id'])}).sort('order_date', 1)
+            orders = db.orders.find({'user_id': ObjectId(payload['_id'])}).sort('order_date', DESCENDING)
             orders_data = []
             for order in orders:
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
@@ -375,6 +375,7 @@ def booking_tour():
     jenis_paket = request.form['jenis_paket']
     tanggal_tour = request.form['tanggal_tour']
     no_telp = request.form['no_telp']
+    total_harga = request.form['total_harga']
 
     token_receive = request.cookies.get(TOKEN_KEY)
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -386,9 +387,10 @@ def booking_tour():
         'jumlah_tiket': jumlah_tiket,
         'jenis_paket': jenis_paket,
         'tanggal_tour': tanggal_tour,
+        'total_harga': total_harga,
+        'status': 'pending',
         'tour_id': tour,
         'user_id': user_id,
-        'status': 'pending',
         'order_date': datetime.now()
     })
 

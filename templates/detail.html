@@ -114,7 +114,7 @@
       <input type="tel" id="no_telp" name="no_telp" required />
 
       <label for="jumlah_tiket">Jumlah Tiket:</label>
-      <input type="number" id="jumlah_tiket" name="jumlah_tiket" required />
+      <input type="number" id="jumlah_tiket" name="jumlah_tiket" min="1" value="1" required />
 
       <label for="jenis_paket">Jenis Paket:</label>
       <select id="jenis_paket" name="jenis_paket" required>
@@ -126,7 +126,9 @@
       <label for="tanggal_tour">Tanggal Tour:</label>
       <input type="date" id="tanggal_tour" name="tanggal_tour" required />
 
-      <h5 class="text-center">Total Harga : Rp 1.000.000</h5>
+      <input type="hidden" name="total_harga" id="total_harga" value="{{ tour_details.price }}">
+
+      <h5 class="text-center">Total Harga : <span class="tour-price" id="total_price">{{ tour_details.price }}</span></h5>
       <button type="submit">Booking</button>
     </form>
   </section>
@@ -216,6 +218,34 @@
         const price = parseFloat(priceElement.textContent);
         priceElement.textContent = formatCurrency(price);
       });
+    });
+
+    $('#jenis_paket').on('change', function () {
+      var jenisPaket = this.value;
+      var jumlahTiket = $("#jumlah_tiket").val();
+      var tourPrice = '{{ tour_details.price }}';
+      var totalHarga = jumlahTiket * tourPrice;
+
+      if (jenisPaket == 'tour_dokumentasi') {
+        totalHarga+= 500000;
+      }
+
+      $("#total_harga").val(totalHarga);
+      $("#total_price").text(formatCurrency(totalHarga));
+    });
+
+    $("#jumlah_tiket").on("change", function() {
+      var jumlahTiket = $(this).val();
+      var tourPrice = '{{ tour_details.price }}';
+      var jenisPaket = $('#jenis_paket').val()
+      var totalHarga = jumlahTiket * tourPrice;
+
+      if (jenisPaket == 'tour_dokumentasi') {
+        totalHarga+= 500000;
+      }
+
+      $("#total_harga").val(totalHarga);
+      $("#total_price").text(formatCurrency(totalHarga));
     });
 
     function logout() {

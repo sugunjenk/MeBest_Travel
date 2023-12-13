@@ -138,7 +138,7 @@
               {% endif %}
 
               {% if payloads['role'] == 1 %}
-              <select class="status form-select border border-dark w-50" id="status_admin"
+              <select class="status form-select border border-dark w-50 status_admin"
                 aria-label="Default select example" data-id="{{ order._id }}">
                 <option value="success" {{ 'selected' if order.status=='success' else '' }}>Success</option>
                 <option value="pending" {{ 'selected' if order.status=='pending' else '' }}>Pending</option>
@@ -223,7 +223,7 @@
       });
     });
 
-    $('#status_admin').on('change', function () {
+    $('.status_admin').on('change', function () {
       var status = this.value;
       var order_id = $(this).data('id');
       $.ajax({
