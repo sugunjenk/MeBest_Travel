@@ -85,134 +85,73 @@
 
     </header>
     <main class="container-fluid p-0">
-        <!-- content 1 -->
-        <div class="container-fluid d-flex align-items-center p-3">
-            <div id="cek" class="d-flex gap-4 justify-content-stretch w-100">
-                <div class="gambar d-block p-1">
-                    <img src="/static/img/profile-2023-10-15-18-06-10.jpg" alt="Tanjung Pinang">
-                </div>
-                <div class="text d-flex gap-2 flex-column align-items-stretch justify-content-stretch w-100">
-                    <h2 class="title" style="color: orange;">Tanjung Pinang</h2>
+        {% for order in orders_data %}
+          <div class="container-fluid d-flex align-items-center p-3">
+              <div id="cek" class="d-flex gap-4 justify-content-stretch w-100">
+                  <div class="gambar d-block p-1">
+                      <img src="{{ order.image }}" alt="{{ order.tour }}">
+                  </div>
+                  <div class="text d-flex gap-2 flex-column align-items-stretch justify-content-stretch w-100">
+                      <h2 class="title" style="color: orange;">{{ order.tour }}</h2>
+  
+                      <table class="w-100">
+                          <tr id="namaPemesan">
+                              <td class="text-start">Nama Pemesanan</td>
+                              <td class="text-start">
+                                  <div>{{ order.nama }}</div>
+                              </td>
+                          </tr>
+                          <tr id="noPemesan">
+                              <td class="text-start">No Pemesan</td>
+                              <td class="text-start">{{ order.no_telp }}</td>
+                          </tr>
+                          <tr id="tglPemesan">
+                              <td class="text-start">Tanggal Tour</td>
+                              <td class="text-start">{{ order.tanggal_tour }}</td>
+                          </tr>
+                          <tr id="jmlTicket">
+                              <td class="text-start">Jumlah Ticket</td>
+                              <td class="text-start">{{ order.jumlah_tiket }} Ticket</td>
+                          </tr>
+                          <tr id="jenisPaket">
+                              <td class="text-start">Jenis Paket</td>
+                              <td class="text-start">
+                                {% if order.jenis_paket == 'tour_dokumentasi' %}
+                                Paket B : Tour & Documentations
+                                {% else %}
+                                Paket A : Tour
+                                {% endif %}
+                              </td>
+                          </tr>
+                          <tr id="jmlHarga">
+                              <td class="text-start">Jumlah Harga</td>
+                              <td class="text-start tour-price">{{ order.price }}</td>
+                          </tr>
+                      </table>
+                      <div class="statusWaktu d-flex justify-content-between align-items-center w-100">
+                          <div class="statusPerubahan d-flex justify-content-start align-items-center">
+                              {% if order.status == 'pending' %}
+                              <p id="hasilStatus" class="text-center text-warning p-2 border border-warning border-2 my-0 "> Pending</p>
+                              {% elif order.status == 'success' %}
+                              <p id="hasilStatus" class="text-center text-success p-2 border border-success border-2 my-0 ">Success</p>
+                              {% else %}
+                              <p id="hasilStatus" class="text-center text-danger p-2 border border-danger border-2 my-0 ">Dibatalkan</p>
+                              {% endif %}
 
-                    <table class="w-100">
-                        <tr id="namaPemesan">
-                            <td class="text-start">Nama Pemesanan</td>
-                            <td class="text-start">
-                                <div>Salahudin Kholik Prasetyono</div>
-                            </td>
-                        </tr>
-                        <tr id="noPemesan">
-                            <td class="text-start">No Pemesan</td>
-                            <td class="text-start">+62895359530117</td>
-                        </tr>
-                        <tr id="tglPemesan">
-                            <td class="text-start">Tanggal Tour</td>
-                            <td class="text-start">11/02/2003 11:05</td>
-                        </tr>
-                        <tr id="jmlTicket">
-                            <td class="text-start">Jumlah Ticket</td>
-                            <td class="text-start">2 Ticket</td>
-                        </tr>
-                        <tr id="jenisPaket">
-                            <td class="text-start">Jenis Paket</td>
-                            <td class="text-start">Paket B : Tour & Documentations</td>
-                        </tr>
-                        <tr id="jmlHarga">
-                            <td class="text-start">Jumlah Harga</td>
-                            <td class="text-start">Rp 250,000</td>
-                        </tr>
-                    </table>
-                    <div class="statusWaktu d-flex justify-content-between align-items-center w-100">
-                        <div class="statusPerubahan d-flex justify-content-start align-items-center">
-                            <p id="hasilStatus"
-                                class="text-center text-success p-2 border border-success border-2 my-0 ">Success
-                            </p>
-                            <p id="hasilStatus"
-                                class="text-center d-none text-warning p-2 border border-warning border-2 my-0 ">
-                                Pending</p>
-                            <p id="hasilStatus"
-                                class=" text-center d-none text-danger p-2 border border-danger border-2 my-0 ">
-                                Dibatalkan</p>
-                            <select class="status form-select border border-dark w-50" id="status_admin"
-                                aria-label="Default select example">
-                                <option selected disabled>-- pilih Status --</option>
-                                <option value="success">Success</option>
-                                <option value="pending">Pending</option>
-                                <option value="dibatalkan">Dibatalkan</option>
-                            </select>
-                        </div>
-                        <p class="tanggalKadaluarsa text-end text-danger fw-bold my-0">22/12/2002 11:59</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end-content-1 -->
-        <hr>
+                              <select class="status form-select border border-dark w-50" id="status_admin" aria-label="Default select example">
+                                  <option value="success" {{ 'selected' if order.status == 'success' else '' }}>Success</option>
+                                  <option value="pending" {{ 'selected' if order.status == 'pending' else '' }}>Pending</option>
+                                  <option value="dibatalkan" {{ 'selected' if order.status == 'dibatalkan' else '' }}>Dibatalkan</option>
+                              </select>
+                          </div>
 
-        <!-- content 2 -->
-        <div class="container-fluid d-flex align-items-center p-3">
-            <div id="cek" class="d-flex gap-4 justify-content-stretch w-100">
-                <div class="gambar d-block p-1">
-                    <img src="/static/img/pantai-batu-belig-bandung.jpg" alt="Tanjung Pinang">
-                </div>
-                <div class="text d-flex gap-2 flex-column align-items-stretch justify-content-stretch w-100">
-                    <h2 class="title" style="color: orange;">Tanjung Pinang</h2>
-
-                    <table class="w-100">
-                        <tr id="namaPemesan">
-                            <td class="text-start">Nama Pemesanan</td>
-                            <td class="text-start">
-                                <div>Salahudin Kholik Prasetyono</div>
-                            </td>
-                        </tr>
-                        <tr id="noPemesan">
-                            <td class="text-start">No Pemesan</td>
-                            <td class="text-start">+62895359530117</td>
-                        </tr>
-                        <tr id="tglPemesan">
-                            <td class="text-start">Tanggal Tour</td>
-                            <td class="text-start">11/02/2003 11:05</td>
-                        </tr>
-                        <tr id="jmlTicket">
-                            <td class="text-start">Jumlah Ticket</td>
-                            <td class="text-start">2 Ticket</td>
-                        </tr>
-                        <tr id="jenisPaket">
-                            <td class="text-start">Jenis Paket</td>
-                            <td class="text-start">Paket B : Tour </td>
-                        </tr>
-                        <tr id="jmlHarga">
-                            <td class="text-start">Jumlah Harga</td>
-                            <td class="text-start">Rp 250,000</td>
-                        </tr>
-                    </table>
-                    <div class="statusWaktu d-flex justify-content-between align-items-center w-100">
-                        <div class="statusPerubahan d-flex justify-content-start align-items-center">
-                            <p id="hasilStatus"
-                                class="text-center text-success p-2 border border-success border-2 my-0 ">Success
-                            </p>
-                            <p id="hasilStatus"
-                                class="text-center d-none text-warning p-2 border border-warning border-2 my-0 ">
-                                Pending</p>
-                            <p id="hasilStatus"
-                                class=" text-center d-none text-danger p-2 border border-danger border-2 my-0 ">
-                                Dibatalkan</p>
-                            <select class="status form-select border border-dark w-50" id="status_admin"
-                                aria-label="Default select example">
-                                <option selected disabled>-- pilih Status --</option>
-                                <option value="success">Success</option>
-                                <option value="pending">Pending</option>
-                                <option value="dibatalkan">Dibatalkan</option>
-                            </select>
-                        </div>
-                        <p class="tanggalKadaluarsa text-end text-danger fw-bold my-0">22/12/2002 11:59</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end-content-1 -->
-        <hr>
-
+                          <p class="tanggalKadaluarsa text-end text-danger fw-bold my-0">{{ order.order_date }}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <hr>
+        {% endfor %}
     </main>
     <!-- footer -->
     <footer>
@@ -255,7 +194,6 @@
                         <a style="text-decoration: none" href="">
                             <p style="color: #252525">Kontak : 081237085281</p>
                         </a>
-
                     </div>
                 </div>
             </div>
@@ -265,6 +203,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
+    <script>
+      function formatCurrency(amount) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+      }
+  
+      document.addEventListener('DOMContentLoaded', function () {
+        const tourPrices = document.querySelectorAll('.tour-price');
+  
+        tourPrices.forEach(function (priceElement) {
+          const price = parseFloat(priceElement.textContent);
+          priceElement.textContent = formatCurrency(price);
+        });
+      });
+
+      $('#status_admin').on('change', function() {
+        var status = this.value;
+        location.reload();
+        // $.ajax({
+        //   type: 'POST',
+        //   url: '/delete_tour',
+        //   data: { 'deleteTourId': tourId },
+        //   success: function (response) {
+        //     if (response.result === 'success') {
+        //       // Muat ulang halaman setelah menghapus tur
+        //       location.reload();
+        //     } else {
+        //       console.log(response)
+        //       alert('Gagal menghapus tur: ' + response.msg);
+        //     }
+        //   },
+        //   error: function (error) {
+        //     console.error('Error:', error);
+        //     alert('Terjadi kesalahan saat menghapus tur');
+        //   }
+        // });
+      });
+    </script>
 
 </body>
 

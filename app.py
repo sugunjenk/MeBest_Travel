@@ -81,15 +81,21 @@ def cek_pesanan():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         if payload['role'] == 1:
             orders = db.orders.find()
-            orders_data = {}
+            orders_data = []
             for order in orders:
-                print(order)
-            print(list(orders))
+                tour_data = db.tours.find_one({'_id': order['tour_id']})
+                order['tour'] = tour_data['title']
+                order['price'] = tour_data['price']
+                order['image'] = tour_data['image_path']
+                order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
+                orders_data.append(order)
+                print(tour_data)
+            print(orders_data)
             pass
         elif payload['role'] == 2:
             print(payload)
 
-        return render_template('cekPesanan.html', payloads=payload, token_key=TOKEN_KEY)
+        return render_template('cekPesanan.html', payloads=payload, orders_data=orders_data, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('to_login', msg="Session berakhir,Silahkan Login Kembali"))
@@ -361,7 +367,7 @@ def booking_tour():
         'tanggal_tour': tanggal_tour,
         'tour_id': tour,
         'user_id': user_id,
-        'status': 'Pending',
+        'status': 'pending',
         'order_date': datetime.now()
     })
 
