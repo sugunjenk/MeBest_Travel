@@ -124,7 +124,7 @@
             </tr>
             <tr id="jmlHarga">
               <td class="text-start">Jumlah Harga</td>
-              <td class="text-start tour-price">{{ order.price }}</td>
+              <td class="text-start tour-price">{{ order.total_harga or 0 }}</td>
             </tr>
           </table>
           <div class="statusWaktu d-flex justify-content-between align-items-center w-100">

@@ -85,7 +85,6 @@ def cek_pesanan():
             for order in orders:
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
                 order['tour'] = tour_data['title']
-                order['price'] = tour_data['price']
                 order['image'] = tour_data['image_path']
                 order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
                 orders_data.append(order)
@@ -96,7 +95,6 @@ def cek_pesanan():
             for order in orders:
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
                 order['tour'] = tour_data['title']
-                order['price'] = tour_data['price']
                 order['image'] = tour_data['image_path']
                 order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
                 orders_data.append(order)
