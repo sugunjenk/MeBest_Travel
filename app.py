@@ -353,6 +353,12 @@ def booking_tour():
 
     return redirect('cek_pesanan')
 
+@app.route('/search_tours', methods=['POST'])
+def search_tours():
+    search_term = request.form.get('searchTerm', '').lower()
+    tours_data = db.tours.find()
+    filtered_tours = [tour for tour in tours_data if search_term in tour['title'].lower() or search_term in tour['description'].lower()]
+    return jsonify(filtered_tours)
 
 if __name__ == '__main__':
     app.run(debug=True)
