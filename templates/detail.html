@@ -108,7 +108,7 @@
     <form style="margin-top: 45px;" action="/booking" method="post">
       <input type="hidden" name="tour" value="{{tour_details._id }}">
       <label for="nama">Nama:</label>
-      <input type="text" id="nama" name="nama" value="{{ db_user.nickname }}" disabled required />
+      <input type="text" id="nama" name="nama" value="{{ db_user.nickname }}" required readonly />
 
       <label for="no_telp">No.Telepon:</label>
       <input type="tel" id="no_telp" name="no_telp" required />

@@ -78,10 +78,17 @@ def documentation():
 def cek_pesanan():
     token_receive = request.cookies.get(TOKEN_KEY)
     try:
-        # 'id': result['nickname'],
-        # 'role': result['role'],
-        # 'exp': datetime.utcnow() + timedelta(seconds=60*60)
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        if payload['role'] == 1:
+            orders = db.orders.find()
+            orders_data = {}
+            for order in orders:
+                print(order)
+            print(list(orders))
+            pass
+        elif payload['role'] == 2:
+            print(payload)
+
         return render_template('cekPesanan.html', payloads=payload, token_key=TOKEN_KEY)
 
     except jwt.ExpiredSignatureError:
