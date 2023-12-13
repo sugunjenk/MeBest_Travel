@@ -111,32 +111,48 @@
     const searchInput = document.querySelector("#searchInput");
     const searchData = document.querySelector(".search-data");
 
+    // Tambahkan variabel untuk menyimpan status pencarian
+    let isSearching = false;
+
     searchBtn.onclick = () => {
-      searchBox.classList.add("active");
-      searchBtn.classList.add("active");
-      searchInput.classList.add("active");
-      cancelBtn.classList.add("active");
-      searchInput.focus();
-      if (searchInput.value !== "") {
-        searchTours(searchInput.value);
-        searchData.classList.remove("active");
-      } 
+      // Tambahkan kondisi untuk memeriksa apakah sudah dalam mode pencarian
+      if (!isSearching) {
+        // Jika belum dalam mode pencarian, aktifkan dan bersihkan input
+        isSearching = true;
+        searchBox.classList.add("active");
+        searchBtn.classList.add("active");
+        searchInput.classList.add("active");
+        cancelBtn.classList.add("active");
+        searchInput.focus();
+        searchInput.value = "";  // Membersihkan input
+      } else {
+        // Jika sudah dalam mode pencarian, lakukan pencarian
+        if (searchInput.value !== "") {
+          searchTours(searchInput.value);
+          searchData.classList.remove("active");
+        }
+      }
     };
 
     cancelBtn.onclick = () => {
-      searchBox.classList.remove("active");
-      searchBtn.classList.remove("active");
-      searchInput.classList.remove("active");
-      cancelBtn.classList.remove("active");
-      searchData.classList.toggle("active");
-      searchInput.value = "";
+      
+      if (isSearching) {
+        
+        isSearching = false;
+        searchBox.classList.remove("active");
+        searchBtn.classList.remove("active");
+        searchInput.classList.remove("active");
+        cancelBtn.classList.remove("active");
+        searchData.classList.toggle("active");
+        searchInput.value = "";
+      }
     };
 
     function searchTours(searchTerm) {
       if (searchTerm.length === 0){
         window.location.replace(`/tours`);
       }
-      // Gunakan AJAX untuk mengambil hasil pencarian dari server
+      /
       $.ajax({
         url: "/search_tours",
         type: "POST",
