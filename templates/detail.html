@@ -102,35 +102,41 @@
   </section>
 
   <section class="booking">
-    <h3 class="text-center mb-3" style="margin-bottom: 10px;">
-      Wujudkan Impian Liburanmu Sekarang Juga Bersama MeBest Travel!
-    </h3>
-    <form style="margin-top: 45px;" action="/booking" method="post">
-      <input type="hidden" name="tour" value="{{tour_details._id }}">
-      <label for="nama">Nama:</label>
-      <input type="text" id="nama" name="nama" value="{{ db_user.nickname }}" required readonly />
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+          <h3 class="text-center mb-3" style="margin-bottom: 10px;">
+            Wujudkan Impian Liburanmu Sekarang Juga Bersama MeBest Travel!
+          </h3>
+          <form style="margin-top: 45px;" action="/booking" method="post">
+            <input type="hidden" name="tour" value="{{tour_details._id }}">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" value="{{ db_user.nickname }}" required readonly />
 
-      <label for="no_telp">No.Telepon:</label>
-      <input type="tel" id="no_telp" name="no_telp" required />
+            <label for="no_telp">No.Telepon:</label>
+            <input type="tel" id="no_telp" name="no_telp" required />
 
-      <label for="jumlah_tiket">Jumlah Tiket:</label>
-      <input type="number" id="jumlah_tiket" name="jumlah_tiket" min="1" value="1" required />
+            <label for="jumlah_tiket">Jumlah Tiket:</label>
+            <input type="number" id="jumlah_tiket" name="jumlah_tiket" min="1" value="1" required />
 
-      <label for="jenis_paket">Jenis Paket:</label>
-      <select id="jenis_paket" name="jenis_paket" required>
-        <option selected disabled>-- Pilih Jenis Paket --</option>
-        <option value="tour">Tour</option>
-        <option value="tour_dokumentasi">Tour + Dokumentasi</option>
-      </select>
+            <label for="jenis_paket">Jenis Paket:</label>
+            <select id="jenis_paket" name="jenis_paket" required>
+              <option selected disabled>-- Pilih Jenis Paket --</option>
+              <option value="tour">Tour</option>
+              <option value="tour_dokumentasi">Tour + Dokumentasi</option>
+            </select>
 
-      <label for="tanggal_tour">Tanggal Tour:</label>
-      <input type="date" id="tanggal_tour" name="tanggal_tour" required />
+            <label for="tanggal_tour">Tanggal Tour:</label>
+            <input type="date" id="tanggal_tour" name="tanggal_tour" required />
 
-      <input type="hidden" name="total_harga" id="total_harga" value="{{ tour_details.price }}">
+            <input type="hidden" name="total_harga" id="total_harga" value="{{ tour_details.price }}">
 
-      <h5 class="text-center">Total Harga : <span class="tour-price" id="total_price">{{ tour_details.price }}</span></h5>
-      <button type="submit">Booking</button>
-    </form>
+            <h5 class="text-center">Total Harga : <span class="tour-price" id="total_price">{{ tour_details.price }}</span></h5>
+            <button type="submit">Booking</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- footer -->
