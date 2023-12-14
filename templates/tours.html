@@ -194,20 +194,20 @@
                 {% endif %}
               </p>
               <p class="card-text">Price: <span class="tour-price">{{ tour.price }}</span></p>
-              <div class="text-center">
-                <button class="btn btn-primary" onclick="redirectToDetails('{{ tour._id }}')">Details</button>
-                <p></p>
-              </div>
-              <div class="d-none text-center" id="button_admin_card">
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editTourModal"
-                  data-id="{{ tour._id }}">
-                  Edit
-                </button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTourModal"
-                  data-id="{{ tour._id }}">
-                  Delete
-                </button>
-
+              <div class="btncrud">
+                <div class="text-center">
+                  <button class="btn btn-primary" onclick="redirectToDetails('{{ tour._id }}')">Details</button>
+                  <p></p>
+                </div>
+                <div class="d-none text-center" id="button_admin_card">
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editTourModal" data-id="{{ tour._id }}">
+                    Edit
+                  </button>                
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTourModal"
+                    data-id="{{ tour._id }}">
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -354,14 +354,26 @@
 
       // Mengisi nilai sebelumnya pada modal
       $("#editTourId").val(tourId);
-      $("#editTourTitle").val(button.closest(".card").find(".card-title").text());
-      $("#editTourDescription").val(button.closest(".card").find(".card-text:first").text());
-      $("#editTourPrice").val(button.closest(".card").find(".card-text:last").text());
+
+      // Mengambil detail tur dari server
+      $.ajax({
+        url: "/get_tour_details?id=" + tourId,
+        method: "GET",
+        success: function (data) {
+          $("#editTourTitle").val(data.title);
+          $("#editTourDescription").val(data.description);
+          $("#editTourPrice").val(data.price);
+        },
+        error: function (error) {
+          console.log("Error fetching tour details:", error);
+        },
+      });
 
       // Menampilkan gambar saat ini
       var currentImage = button.closest(".card").find("img").attr("src");
       $("#currentTourImage").attr("src", currentImage);
     });
+
 
     $("#deleteTourModal").on("show.bs.modal", function (event) {
       var button = $(event.relatedTarget);
