@@ -83,15 +83,6 @@ a {
     color: white !important;
 }
 
-
-#Hero {
-    width: 100%;
-    background-image: url('./bgHero.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 700px;
-}
-
 .fcontainer {
     height: 100%;
     display: grid;

@@ -1,10 +1,3 @@
-*,
-::before,
-::after {
-    margin: 0;
-    padding: 0;
-}
-
 .wrap-brand .nav-link {
     margin: 0;
     font-size: 2rem;
@@ -17,10 +10,6 @@
     padding-block: 1rem;
     height: 80px;
     align-items: center;
-}
-
-body {
-    box-sizing: border-box;
 }
 
 #active {
@@ -60,22 +49,6 @@ main {
     margin-block: 3rem;
 }
 
-
-#Hero {
-    width: 100%;
-    background-image: url('/static/bgHero.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 500px;
-}
-
-.fcontainer {
-    height: 100%;
-    display: grid;
-    place-items: center;
-    background-color: rgba(0, 0, 0, 0.315);
-}
-
 #narator :is(.col-md-8, .col-md-4) {
     padding-block: 2.5rem;
 }
@@ -90,31 +63,7 @@ main {
 }
 
 @media screen and (max-width:992px) {
-    .navbar-nav {
-        text-align: center;
-        gap: unset;
-    }
 
-    .navbar {
-        background-color: #ffa600;
-    }
-
-    /* copy sini */
-    #active {
-        font-weight: 700;
-        transition: font-weight .4s ease-in-out;
-        border: none;
-    }
-
-    .active {
-        border: none;
-    }
-
-    #linker li:hover {
-        font-weight: 700;
-        transition: font-weight .4s ease-in-out;
-        border: none;
-    }
 
     #linker li.scroll:active {
         font-weight: 700;
@@ -133,14 +82,6 @@ main {
     #narator :is(.col-md-8, .col-md-4) {
         padding-block: 0;
     }
-}
-
-@media screen and (max-width: 375px) {
-    .navbar-brand img {
-        width: 85%;
-        height: 40px
-    }
-
 }
 
 .video .heading {
