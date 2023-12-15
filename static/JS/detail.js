@@ -1,15 +1,3 @@
-$(document).ready(function () {
-  const linker = $('#linker li')
-  let select = ''
-  for (const data of linker.siblings().children()) {
-    if (data.text != 'Documentation') continue
-    select = data
-    break
-  }
-  select.id = 'active'
-  document.getElementById('active').style.borderBottom = '2px solid #ffa500'
-})
-
 window.onscroll = function () {
   scrollFunction()
 }

@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/static/index.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="/static/JS/index.js"></script>
 </head>
 
 <body>
@@ -321,28 +322,6 @@
   <!-- end footer -->
 
   <script>
-    window.onscroll = function () {
-      scrollFunction();
-    };
-
-    function scrollFunction() {
-      if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
-      ) {
-        document.getElementById("navbar").style.backgroundColor = "orange";
-        document.getElementById("active").style.color = "#ffffff";
-        document.getElementById("active").style.borderBottom =
-          "2px solid #ffffff";
-      } else {
-        document.getElementById("navbar").style.backgroundColor =
-          "transparent";
-        document.getElementById("navbar").style.transition = "0.3s";
-        document.getElementById("active").style.color = "#ffa500";
-        document.getElementById("active").style.borderBottom =
-          "2px solid #ffa500";
-      }
-    }
 
     function logout() {
       alert('Anda telah logout')

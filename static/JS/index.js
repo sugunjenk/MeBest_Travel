@@ -2,7 +2,7 @@ $(document).ready(function () {
   const linker = $('#linker li')
   let select = ''
   for (const data of linker.siblings().children()) {
-    if (data.text != 'Documentation') continue
+    if (data.text != 'Home') continue
     select = data
     break
   }

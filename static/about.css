@@ -35,7 +35,7 @@ section {
 }
 
 #active {
-  border-bottom: 2px solid white;
+  border-bottom-color: rgba(255, 166, 0, 1);
 }
 
 .about .row .col-md-6 a {
@@ -112,10 +112,6 @@ section {
 
 .caption h4 {
   font-size: 21px;
-}
-
-#active {
-  color: orange;
 }
 
 body {
@@ -227,11 +223,6 @@ a {
 }
 
 /* copy sini */
-#active {
-  font-weight: 700;
-  transition: font-weight .4s ease-in-out;
-  border: none;
-}
 
 .active {
   border: none;

@@ -13,6 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
   <link rel="stylesheet" href="/static/header_footer.css" />
   <link rel="stylesheet" href="/static/about.css" />
+  <script src="/static/JS/about.js"></script>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
             <a class="nav-link" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a id="active" class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/about">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/documentation">Documentation</a>
@@ -272,28 +273,6 @@
   <!-- end footer -->
 
   <script>
-    window.onscroll = function () {
-      scrollFunction();
-    };
-
-    function scrollFunction() {
-      if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
-      ) {
-        document.getElementById("navbar").style.backgroundColor = "orange";
-        document.getElementById("active").style.color = "#ffffff";
-        document.getElementById("active").style.borderBottom =
-          "2px solid #ffffff";
-      } else {
-        document.getElementById("navbar").style.backgroundColor =
-          "transparent";
-        document.getElementById("navbar").style.transition = "0.3s";
-        document.getElementById("active").style.color = "#ffa500";
-        document.getElementById("active").style.borderBottom =
-          "2px solid #ffa500";
-      }
-    }
     function logout() {
       alert('Anda telah logout')
       $.removeCookie('{{token_key}}', { path: '/' });
