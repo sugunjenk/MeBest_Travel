@@ -7,10 +7,14 @@
   border: none;
 }
 
+#linker li {
+  font-weight: auto;
+  border-bottom: 2px solid rgba(255, 255, 255, 0);
+  transition: .4s ease-in-out;
+}
+
 #linker li:hover {
-  font-weight: 700;
-  transition: font-weight 0.4s ease-in-out;
-  border: none;
+  border-bottom-color: rgba(255, 166, 0, 1);
 }
 
 .TambahTour button {

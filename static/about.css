@@ -27,7 +27,7 @@ section {
 }
 
 #linker li:hover {
-  border-bottom-color: rgba(255, 255, 255, 1);
+  border-bottom-color: rgba(255, 166, 0, 1);
 }
 
 .navbar-nav li:last-child:hover {
@@ -225,12 +225,6 @@ a {
 /* copy sini */
 
 .active {
-  border: none;
-}
-
-#linker li:hover {
-  font-weight: 700;
-  transition: font-weight .4s ease-in-out;
   border: none;
 }
 
