@@ -12,15 +12,17 @@ from flask import request, redirect, url_for
 from bson import ObjectId, json_util
 from flask import abort
 
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 client = MongoClient(
-    "mongodb+srv://admin:admin123@mebesttravel.75vrujy.mongodb.net/?retryWrites=true&w=majority")
+    environ.get('MONGODB_URL'))
 
 db = client.mebest
 
-SECRET_KEY = 'Mebest'
+SECRET_KEY = environ.get('SECRET_KEY')
 
-TOKEN_KEY = 'token_mebest'
+TOKEN_KEY = environ.get('TOKEN_KEY')
 
 app = Flask(__name__)
 
