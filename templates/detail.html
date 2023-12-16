@@ -141,7 +141,8 @@
             <input type="hidden" name="total_harga" id="total_harga" value="{{ tour_details.price }}">
 
             <h5 class="text-center">Total Harga : <span class="tour-price" id="total_price">{{ tour_details.price }}</span></h5>
-            <button type="submit">Booking</button>
+
+            <button {% if db_user.role == 1 %} onclick="alert('Admin tidak bisa booking')" {% else %} type="submit" {% endif %}>Booking</button>
           </form>
         </div>
       </div>
