@@ -4,6 +4,16 @@
     font-weight: 500;
 }
 
+hr {
+    margin: 0;
+    border: none;
+    outline: none;
+    background-color: white;
+    opacity: .5;
+    width: 2px;
+    height: 100%
+}
+
 .wrap-brand .navbar-brand:last-child {
     margin: 0;
     padding: 0;
@@ -58,17 +68,30 @@ main {
     text-align: justify;
 }
 
+h2.nav-nickname {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: white;
+}
+
 #narator img {
     width: 150px;
 }
 
-@media screen and (max-width:992px) {
+@media(max-width:992px) {
 
 
     #linker li.scroll:active {
         font-weight: 700;
         transition: font-weight .4s ease-in-out;
         border: none;
+    }
+
+    hr {
+        opacity: 1;
+        width: 2px;
+        height: 42px;
     }
 
     /* dan sini */
@@ -214,5 +237,11 @@ main {
 @media (max-width:768px) {
     .gambar .container .popup-image img {
         width: 95%;
+    }
+}
+
+@media (max-width:338px) {
+    .wrap-brand {
+        width: 75%;
     }
 }

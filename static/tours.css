@@ -166,3 +166,34 @@
   text-align: left;
   /* Atur teks pada bagian card-text menjadi paling kiri */
 }
+
+h2.nav-nickname {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: white;
+}
+
+hr {
+  margin: 0;
+  border: none;
+  outline: none;
+  background-color: white;
+  opacity: .5;
+  width: 2px;
+  height: 100%
+}
+
+@media (max-width:992px) {
+  hr {
+    opacity: 1;
+    width: 2px;
+    height: 42px;
+  }
+}
+
+@media (max-width:338px) {
+  .wrap-brand {
+    width: 75%;
+  }
+}
