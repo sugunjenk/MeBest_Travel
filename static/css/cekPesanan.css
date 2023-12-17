@@ -10,6 +10,14 @@ body {
     overflow-x: hidden;
     gap: 2rem;
     margin-top: 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+main {
+    flex: 1;
 }
 
 .wrap-brand .nav-link {
@@ -158,6 +166,10 @@ tr td:last-child {
 .navbar-brand img {
     width: 100%;
     height: 70px;
+}
+
+footer {
+    margin-top: auto;
 }
 
 @media screen and (max-width: 1200px) {
