@@ -116,11 +116,18 @@
     const searchData = document.querySelector(".search-data");
     const noResultsMessage = document.getElementById("noResultsMessage");
 
-    let isSearching = false;
+    isSearching = false; // buat jadiin ubah variable dari lokal
 
-    searchBtn.onclick = () => {
+    $(document).keypress(function (event) {
+      if (event.key === 'Enter') {
+        value_for_search(isSearching)
+      }
+    })
+    
+    function value_for_search(isSearching) {
+      console.log(window.isSearching)
       if (!isSearching) {
-        isSearching = true;
+        window.isSearching = true;
         searchBox.classList.add("active");
         searchBtn.classList.add("active");
         searchInput.classList.add("active");
@@ -134,7 +141,11 @@
           window.location.replace(`/tours`);
         }
       }
-    };
+    }
+    
+    searchBtn.onclick = () => {
+      value_for_search(isSearching)
+    }
 
     cancelBtn.onclick = () => {
       isSearching = false;
@@ -292,7 +303,7 @@
             <div class="mb-3">
               <label for="editTourImage" class="form-label">Upload Image</label>
               <input type="file" class="form-control" id="editTourImage" name="editTourImage" accept="image/*"
-                required />
+                 />
             </div>
             <button type="submit" class="btn btn-warning">Save Changes</button>
           </form>
