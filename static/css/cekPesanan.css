@@ -10,15 +10,10 @@ body {
     overflow-x: hidden;
     gap: 2rem;
     margin-top: 50px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
+    
 }
 
-main {
-    flex: 1;
-}
+
 
 .wrap-brand .nav-link {
     margin: 0;
@@ -168,9 +163,7 @@ tr td:last-child {
     height: 70px;
 }
 
-footer {
-    margin-top: auto;
-}
+
 
 @media screen and (max-width: 1200px) {
     .gambar {
