@@ -64,36 +64,36 @@
 
           <!-- nav login -->
           <!-- nav login -->
-        {% if payloads %}
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item d-flex justify-content-center align-items-center gap-2">
-            <h2 class="nav-nickname">{{payloads.nickname.split()[0]}}</h2>
-            <hr>
-            <a class="nav-link ps-0" aria-current="page"><button style="color: white; font-weight: 500"
-                class="Login btn btn-warning px-4 py-2" onclick='logout()'>
-                Logout
-              </button></a>
-          </li>
-        </ul>
-        {% else %}
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/to_login"><button style="color: white; font-weight: 500"
-                class="Login btn btn-warning px-4 py-2">
-                Login
-              </button></a>
-          </li>
-        </ul>
-        {% endif %}
-        <!-- nav login -->
+          {% if payloads %}
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item d-flex justify-content-center align-items-center gap-2">
+              <h2 class="nav-nickname">{{payloads.nickname.split()[0]}}</h2>
+              <hr>
+              <a class="nav-link ps-0" aria-current="page"><button style="color: white; font-weight: 500"
+                  class="Login btn btn-warning px-4 py-2" onclick='logout()'>
+                  Logout
+                </button></a>
+            </li>
+          </ul>
+          {% else %}
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/to_login"><button style="color: white; font-weight: 500"
+                  class="Login btn btn-warning px-4 py-2">
+                  Login
+                </button></a>
+            </li>
+          </ul>
+          {% endif %}
+          <!-- nav login -->
         </div>
       </div>
     </nav>
     <!-- navbar -->
 
   </header>
+  {% if orders_data %}
   <main class="container-fluid p-0">
-    {% if orders_data %}
     {% for order in orders_data %}
     <div class="container-fluid d-flex align-items-center p-3">
       <div id="cek" class="d-flex gap-4 justify-content-stretch w-100">
@@ -164,6 +164,7 @@
     </div>
     <hr>
     {% endfor %}
+<<<<<<< HEAD
     {% else %}
     <style>
       body {
@@ -183,7 +184,14 @@
     </style>
     <p class="text-center m-5 alert alert-danger">Pesanan Kosong</p>
     {% endif %}
+=======
+>>>>>>> 6fbcab77df95c1e0e7555c4874deaf357767e3f1
   </main>
+  {% else %}
+  <main class="container-fluid p-0">
+    <p class="text-center m-5 alert alert-danger">Pesanan Kosong</p>
+  </main>
+  {% endif %}
   <!-- footer -->
   <footer>
     <div class="container-fluid py-5" style="background-color: orange">

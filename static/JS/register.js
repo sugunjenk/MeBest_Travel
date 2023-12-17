@@ -140,3 +140,9 @@ function is_password (asValue) {
   var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/
   return regExp.test(asValue)
 }
+
+$(document).keypress(function (event) {
+  if (event.key === 'Enter') {
+    register()
+  }
+})

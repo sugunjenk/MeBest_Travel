@@ -50,3 +50,9 @@ function login () {
     }
   })
 }
+
+$(document).keypress(function (event) {
+  if (event.key === 'Enter') {
+    login()
+  }
+})
