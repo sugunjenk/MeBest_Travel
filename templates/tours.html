@@ -195,7 +195,7 @@
       <div class="row">
         {% for tour in tours_data %}
         <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-3 card-container">
-          <div class="card shadow" style="width: 18rem">
+          <div class="card shadow" data-aos-duration="1000" data-aos="fade-up" style="width: 18rem">
             <div class="cardImage">
               <img src="{{ tour.image_path }}" class="card-img-top" alt="Tour Image" />
             </div>
@@ -529,19 +529,7 @@
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const cards = document.querySelectorAll('.card-container');
-    let delay = 0;
-
-    cards.forEach(function (card) {
-      card.setAttribute('data-aos', 'fade-up');
-      card.setAttribute('data-aos-duration', '1500');
-      card.setAttribute('data-aos-delay', delay);
-      delay += 50;  // Sesuaikan nilai penundaan antar card di sini
-    });
-
     AOS.init();
-  });
   </script>
 </body>
 
