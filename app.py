@@ -94,11 +94,18 @@ def cek_pesanan():
             orders_data = []
             for order in orders:
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
-                order['tour'] = tour_data['title']
-                order['image'] = tour_data['image_path']
-                order['order_date'] = order['order_date'].strftime(
-                    "%Y-%m-%d %H:%M:%S")
-                orders_data.append(order)
+                if tour_data:
+                    order['tour'] = tour_data.get('title', 'N/A')
+                    order['image'] = tour_data.get('image_path', 'N/A')
+                    order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
+                    orders_data.append(order)
+                else:
+                    # Tangani jika tour_data bernilai None
+                    order['tour'] = 'Tur tidak ditemukan'
+                    order['image'] = 'Path gambar tidak ditemukan'
+                    order['order_date'] = 'Tanggal pesanan tidak ditemukan'
+                    orders_data.append(order)
+
             pass
         elif payload['role'] == 2:
             orders = db.orders.find({'user_id': ObjectId(payload['_id'])}).sort(
@@ -106,11 +113,18 @@ def cek_pesanan():
             orders_data = []
             for order in orders:
                 tour_data = db.tours.find_one({'_id': order['tour_id']})
-                order['tour'] = tour_data['title']
-                order['image'] = tour_data['image_path']
-                order['order_date'] = order['order_date'].strftime(
-                    "%Y-%m-%d %H:%M:%S")
-                orders_data.append(order)
+                if tour_data:
+                    order['tour'] = tour_data['title']
+                    order['image'] = tour_data['image_path']
+                    order['order_date'] = order['order_date'].strftime("%Y-%m-%d %H:%M:%S")
+                    orders_data.append(order)
+                else:
+                    # Handle jika tour_data tidak ditemukan
+                    order['tour'] = 'Tour tidak ditemukan'
+                    order['image'] = 'Path gambar tidak ditemukan'
+                    order['order_date'] = 'Tanggal tidak ditemukan'
+                    orders_data.append(order)
+
 
         return render_template('cekPesanan.html', payloads=data_user, orders_data=orders_data, token_key=TOKEN_KEY)
 
