@@ -8,7 +8,3 @@ Proyek ini dikerjakan untuk sebuah tugas dalam proyek MSIB batch 5 di LearningX 
 
 ## Mentor
 - Farhan Naufaldy
-
-## Tim
-- Selviana
-
