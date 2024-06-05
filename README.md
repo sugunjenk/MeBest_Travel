@@ -8,3 +8,9 @@ Proyek ini dikerjakan untuk sebuah tugas dalam proyek MSIB batch 5 di **Learning
 
 ## Mentor
 - Farhan Naufaldy
+
+## Kelompok
+- Selviana Agatha
+- Suma
+- Dimas Tri
+- Salahudin kholik P
